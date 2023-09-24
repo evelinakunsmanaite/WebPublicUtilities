@@ -8,4 +8,13 @@ package com.model;
  *
  * @author Administrator
  */
-public record User(int id, String email, String password, String firstName, String lastName, String status) {}
+public record User(int id, String email, String password, String firstName, String lastName, String status) {
+public User(int id) {
+        this(id, null, null, null, null, null);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+}
