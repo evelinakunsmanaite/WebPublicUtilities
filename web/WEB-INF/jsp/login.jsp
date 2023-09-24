@@ -10,7 +10,6 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Sign Up Form by Colorlib</title>
 
-
 <style><%@include file="/resources/fonts/material-icon/css/material-design-iconic-font.min.css"%></style>
 <style><%@include file="/resources/css/style.css"%></style>
 </head>
@@ -22,6 +21,7 @@
 
 		<!-- Sing in  Form -->
 		<section class="sign-in">
+                    
 			<div class="container">
 				<div class="signin-content">
 					<div class="signin-image">

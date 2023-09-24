@@ -8,6 +8,8 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%@ page import="java.sql.*"%>
 
 <!DOCTYPE html>
@@ -21,8 +23,8 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-
-        <title>Freelancer - Start Bootstrap Theme</title>
+    
+<title>Freelancer - Start Bootstrap Theme</title>
 
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -40,8 +42,9 @@
             rel="stylesheet" type="text/css" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/index-styles.css" rel="stylesheet" />
         <link href="css/adminTable.css" rel="stylesheet" />
+        
+        <style><%@include file="/resources/css/adminTable.css"%></style>
         <!--
          <script>
             // Сохранение позиции прокрутки перед перезагрузкой страницы
@@ -295,59 +298,40 @@
                 </div>
 
                 <div class="button-container">
-                    <button class="toggle-button" onclick="toggleTable('usersTable')">Вывести данные о пользователей</button>
-                    <button class="toggle-button" onclick="toggleTable('housesTable')">Вывести данные о домов</button>
+                    <button class="toggle-button" onclick="toggleTable('usersTable')"><a href="UserReadServlet">Вывести данные о пользователей</a></button>
+                    <button class="toggle-button" onclick="toggleTable('housesTable') "><a href="HouseReadServlet">Вывести данные о домов</a></button>
 
                 </div>
 
                 <br>
-                <br>  
-
+                
                 
                 <table id="usersTable" class="table" style="display: none;">
 <caption>Данные пользователей</caption>
-<thead>
-                        <tr>
-                            <th>Email</th>
-                            <th>Пароль</th>
-                            <th>Имя</th>
-                            <th>Фамилия</th>
-                            <th>Статус</th>   
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%
-                            try {
-                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/publicutilities?useSSL=false", "root", "evelina2002");
-                                PreparedStatement pst = con.prepareStatement("SELECT * FROM users");
-                                ResultSet rs = pst.executeQuery();
-                                while (rs.next()) {
-                        %>
-                        <tr>                           
-                            <td><%= rs.getString(2)%></td>
-                            <td><%= rs.getString(3)%></td>
-                            <td><%= rs.getString(4)%></td>
-                            <td><%= rs.getString(5)%></td>
-                            <td><%= rs.getString(6)%></td>
-                        </tr>
-                        <%
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        %>  
-                    </tbody>
-                    
-                </table>
 
+            <thead>
+                <th>id</th>
+         <th>email</th>
+            <th>password</th>
+               <th>firstName</th>
+                  <th>lastName</th>
+                     <th>status</th>
+            </thead>
+            <core:forEach var="user" items="${users}">
+                <tr>
+                    <td>${user.id}</td>
+                    <td>${user.email}</td>
+                    <td>${user.password}</td>
+                    <td>${user.firstName}</td>
+                    <td>${user.lastName}</td>
+                    <td>${user.status}</td>
 
-                <br>
-                <br>  
-
+                </tr>
+            </core:forEach>
 
                 <table id="housesTable" class="table" style="display: none;">
                     <caption>Данные домов</caption>
+
                     <thead>
                         <tr>                    
                             <th>Email пользователя</th>
@@ -361,54 +345,74 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
-                            try {
-                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/publicutilities?useSSL=false", "root", "evelina2002");
-                                PreparedStatement pst = con.prepareStatement("SELECT * FROM houses");
-                                ResultSet rs = pst.executeQuery();
-                                while (rs.next()) {
-                        %>
-                        <tr>                        
-                            <td><%= rs.getString(2)%></td>
-                            <td><%= rs.getString(3)%></td>
-                            <td><%= rs.getString(4)%></td>
-                            <td><%= rs.getString(5)%></td>
-                            <td><%= rs.getString(6)%></td>
-                            <td><%= rs.getString(7)%></td>
-                            <td><%= rs.getString(8)%></td>
-                            <td><%= rs.getString(9)%></td>
-                        </tr>
-                        <%
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        %>
+                        <core:forEach var="house" items="${houses}">
+                <tr>
+                    <td>${house.id}</td>
+                    <td>${house.userEmail}</td>
+                    <td>${house.apartmentNumber}</td>
+                    <td>${house.apartmentArea}</td>
+                    <td>${house.floor}</td>
+                    <td>${house.roomsCount}</td>
+                    <td>${house.street}</td>
+                    <td>${house.buildingType}</td>
+                    <td>${house.lifetime}</td>
+
+                </tr>
+            </core:forEach>
                     </tbody>
                 </table>
 
         </section>
 
        <!--скрипт для переключения кнопок таблицы-->
-        <script>
-            var tableStates = {
-                usersTable: false,
-                housesTable: false
-            };
+<script>
+    // Проверяем, есть ли сохраненное состояние в localStorage
+    var tableStates = localStorage.getItem('tableStates');
+    if (tableStates) {
+        tableStates = JSON.parse(tableStates);
+    } else {
+        // Если состояния нет, устанавливаем начальное состояние
+        tableStates = {
+            usersTable: false,
+            housesTable: false
+        };
+    }
 
-            function toggleTable(tableId) {
+   function toggleTable(tableId) {
+    var table = document.getElementById(tableId);
+
+    // Прячем все таблицы перед отображением выбранной
+    for (var key in tableStates) {
+        if (key !== tableId) {
+            var otherTable = document.getElementById(key);
+            otherTable.style.display = "none";
+            tableStates[key] = false;
+        }
+    }
+
+    if (tableStates[tableId]) {
+        table.style.display = "none";
+        tableStates[tableId] = false;
+    } else {
+        table.style.display = "table";
+        tableStates[tableId] = true;
+    }
+
+    // Сохраняем обновленное состояние в localStorage
+    localStorage.setItem('tableStates', JSON.stringify(tableStates));
+}
+
+    // Вызываем функцию для восстановления состояния при загрузке страницы
+    window.addEventListener('load', function() {
+        for (var tableId in tableStates) {
+            if (tableStates[tableId]) {
                 var table = document.getElementById(tableId);
-
-                if (tableStates[tableId]) {
-                    table.style.display = "none";
-                    tableStates[tableId] = false;
-                } else {
-                    table.style.display = "table";
-                    tableStates[tableId] = true;
-                }
+                table.style.display = "table";
             }
-        </script>
+        }
+    });
+</script>
+
 
         <!-- Изменение данных-->
         <section class="page-section" id="change">
@@ -437,35 +441,39 @@
                             <th>Тип здания</th>
                             <th>Срок эксплуатации</th>
                             <th>Изменить</th>
+                            <th>Удалить</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <%
-                            try {
-                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/publicutilities?useSSL=false", "root", "evelina2002");
-                                PreparedStatement pst = con.prepareStatement("SELECT * FROM houses");
-                                ResultSet rs = pst.executeQuery();
-                                while (rs.next()) {
-                        %>
-                        <tr>                        
-                            <td><%= rs.getString(2)%></td>
-                            <td><%= rs.getString(3)%></td>
-                            <td><%= rs.getString(4)%></td>
-                            <td><%= rs.getString(5)%></td>
-                            <td><%= rs.getString(6)%></td>
-                            <td><%= rs.getString(7)%></td>
-                            <td><%= rs.getString(8)%></td>
-                            <td><%= rs.getString(9)%></td>
-                            <td><a href="update.jsp?id=<%= rs.getInt(1)%>">Изменить</a></td>
-                        </tr>
-                        <%
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        %>
+                     <tbody>
+                        <core:forEach var="house" items="${houses}">
+                <tr>
+                    <td>${house.id}</td>
+                    <td>${house.userEmail}</td>
+                    <td>${house.apartmentNumber}</td>
+                    <td>${house.apartmentArea}</td>
+                    <td>${house.floor}</td>
+                    <td>${house.roomsCount}</td>
+                    <td>${house.street}</td>
+                    <td>${house.buildingType}</td>
+                    <td>${house.lifetime}</td>
+<td>
+                    <form action="update">
+                    	<input type="hidden" name="id" value="${gr.id}"/>
+                    	<input type="submit" value="редактировать"/>
+                    </form>                    
+                    </td>
+                                <td>
+                        <form action="delete" method="post">
+                    	<input type="hidden" name="id" value="${gr.id}"/>
+                    	<input type="submit" value="Удалить"/>
+                    </form>
+                    </td>
+                       
+                </tr>
+            </core:forEach>
                     </tbody>
+                            
+                     
                 </table>
             </div>
         </section>
@@ -498,6 +506,22 @@
             }
         </script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+var scrlY, scrlX, x, y;
+
+$(window).on("scroll", function() {
+  scrlY = $(window).scrollTop();
+  scrlX = $(window).scrollLeft();
+  sessionStorage.setItem('valueY', scrlY);
+  sessionStorage.setItem('valueX', scrlX);
+});
+y = sessionStorage.getItem('valueY');
+x = sessionStorage.getItem('valueX');
+$(document).ready(function() {
+  window.scrollTo(x, y);
+});
+</script>
 
     </body>
 </html>
