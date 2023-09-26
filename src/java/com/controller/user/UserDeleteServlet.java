@@ -4,8 +4,12 @@
  */
 package com.controller.user;
 
+import com.controller.InitServlet;
+import com.controller.Jumpable;
+import com.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,31 +21,23 @@ import javax.servlet.http.HttpServletResponse;
  * @author Administrator
  */
 @WebServlet(name = "UserDeleteServlet", urlPatterns = {"/UserDeleteServlet"})
-public class UserDeleteServlet extends HttpServlet {
+public class UserDeleteServlet extends InitServlet implements Jumpable {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserDeleteServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserDeleteServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        Set<User> users = userService.read();
+        request.setAttribute("users", users);
+        jump("/WEB-INF/jsp/deleteUser.jsp", request, response);
+    }
+    
+     @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String id = request.getParameter("id");
+        int _id = Integer.parseInt(id);
+        boolean success = userService.delete(_id);
+        request.setAttribute("success",  success ? "Данные удалены" : "Данные не удалены");
+        jump("/WEB-INF/jsp/result_1.jsp", request, response);
     }
 }

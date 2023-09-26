@@ -22,14 +22,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author Administrator
  */
 @WebServlet(name = "HouseReadServlet", urlPatterns = {"/HouseReadServlet"})
-public class HouseReadServlet  extends InitServlet implements Jumpable {
-
+public class HouseReadServlet extends InitServlet implements Jumpable {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Set<House> houses = houseService.read();
-        
+
         request.setAttribute("houses", houses);
         jump("/WEB-INF/jsp/showHouses.jsp", request, response);
     }

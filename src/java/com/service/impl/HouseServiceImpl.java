@@ -37,7 +37,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public House getById(int id) {
-        return dao.read().stream().filter(house -> id == house.getId())
+        return dao.read().stream().filter(house -> id == house.id())
                 .collect(toSet()).iterator().next();
     }    
 

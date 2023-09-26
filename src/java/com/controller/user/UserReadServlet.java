@@ -22,7 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "UserReadServlet", urlPatterns = {"/UserReadServlet"})
 public class UserReadServlet extends InitServlet implements Jumpable {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,4 +30,3 @@ public class UserReadServlet extends InitServlet implements Jumpable {
         jump("/WEB-INF/jsp/showUsers.jsp", request, response);
     }
 }
-

@@ -1,4 +1,3 @@
-
 package com.controller;
 
 import com.dao.HouseDao;
@@ -22,8 +21,6 @@ public abstract class InitServlet extends HttpServlet {
     protected UserService userService;
     protected HouseService houseService;
 
-
- 
 
     @Override
     public void init() {//инициализация объектов с которыми работает сервлеты

@@ -36,7 +36,7 @@ public class UserSelectServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserSelectServlet</title>");            
+            out.println("<title>Servlet UserSelectServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UserSelectServlet at " + request.getContextPath() + "</h1>");

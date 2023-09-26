@@ -4,6 +4,10 @@
  */
 package com.controller.house;
 
+import com.controller.InitServlet;
+import com.controller.Jumpable;
+import com.model.House;
+import com.model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,24 +21,42 @@ import javax.servlet.http.HttpServletResponse;
  * @author Administrator
  */
 @WebServlet(name = "HouseCreateServlet", urlPatterns = {"/HouseCreateServlet"})
-public class HouseCreateServlet extends HttpServlet {
+public class HouseCreateServlet extends InitServlet implements Jumpable {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
-        }
+        jump("/WEB-INF/jsp/createHouse.jsp", request, response);
+    }//сработывает при нажатии на ссылку добавить 
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String userEmail = request.getParameter("userEmail");
+
+        String apartmentNumberString = request.getParameter("apartmentNumber");
+        int apartmentNumber = Integer.parseInt(apartmentNumberString);
+
+        String apartmentAreaString = request.getParameter("apartmentArea");
+        double apartmentArea = Double.parseDouble(apartmentAreaString);
+
+        String floorString = request.getParameter("floor");
+        int floor = Integer.parseInt(floorString);
+
+        String roomsCountString = request.getParameter("roomsCount");
+        int roomsCount = Integer.parseInt(roomsCountString);
+
+        String street = request.getParameter("street");
+
+        String buildingType = request.getParameter("buildingType");
+
+        String lifeTimeString = request.getParameter("lifeTime");
+        int lifeTime = Integer.parseInt(lifeTimeString);
+        House house = new House(userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
+
+        boolean success = houseService.create(house);
+        request.setAttribute("success", success ? "Данные добавлены" : "Данные не добавлены");
+        jump("/WEB-INF/jsp/result_1.jsp", request, response);
     }
 
 }

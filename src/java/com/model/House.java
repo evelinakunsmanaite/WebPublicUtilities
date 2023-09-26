@@ -12,8 +12,10 @@ public record House (int id, String userEmail, int apartmentNumber, double apart
 public House(int id) {
 this(id, null, 0, 0.0, 0, 0, null, null, 0.0);
 }
-
-    public int getId() {
+public House(String userEmail, int apartmentNumber, double apartmentArea, int floor, int roomsCount, String street, String buildingType, double lifetime) {
+this(0, userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifetime);
+}
+     public int getId() {
         return id;
     }
 

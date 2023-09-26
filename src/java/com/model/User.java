@@ -9,11 +9,16 @@ package com.model;
  * @author Administrator
  */
 public record User(int id, String email, String password, String firstName, String lastName, String status) {
-public User(int id) {
+
+    public User(int id) {
         this(id, null, null, null, null, null);
     }
 
-    public int getId() {
+    public User(String email, String password, String firstName, String lastName, String status) {
+        this(0, email, password, firstName, lastName, status);
+    }
+    
+      public int getId() {
         return id;
     }
 

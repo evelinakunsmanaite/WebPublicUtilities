@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(int id) {
-        return dao.read().stream().filter(user -> id == user.getId())
+        return dao.read().stream().filter(user -> id == user.id())
                 .collect(toSet()).iterator().next();
     }    
 }

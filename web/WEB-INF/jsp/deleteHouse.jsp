@@ -102,24 +102,37 @@
             <div class="container">
                 <div class="table-responsive">
                     <table class="bordered">
-                        <caption>Данные пользователей</caption>
+                        <caption>Данные домов</caption>
 
                         <thead>
                         <th>id</th>
-                        <th>email</th>
-                        <th>password</th>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>status</th>
+                        <th>Email пользователя</th>
+                        <th>Номер квартиры/дома</th>
+                        <th>Площадь квартиры/дома</th>
+                        <th>Этаж</th>
+                        <th>Число комнат</th>
+                        <th>Улица</th>
+                        <th>Тип здания</th>
+                        <th>Срок эксплуатации</th>
+                        <th>Удалить</th>
                         </thead>
-                        <core:forEach var="user" items="${users}">
+                        <core:forEach var="house" items="${houses}">
                             <tr>
-                                <td>${user.id}</td>
-                                <td>${user.email}</td>
-                                <td>${user.password}</td>
-                                <td>${user.firstName}</td>
-                                <td>${user.lastName}</td>
-                                <td>${user.status}</td>
+                                <td>${house.id}</td>
+                                <td>${house.userEmail}</td>
+                                <td>${house.apartmentNumber}</td>
+                                <td>${house.apartmentArea}</td>
+                                <td>${house.floor}</td>
+                                <td>${house.roomsCount}</td>
+                                <td>${house.street}</td>
+                                <td>${house.buildingType}</td>
+                                <td>${house.lifetime}</td>
+                                <td>
+                                    <form action="HouseDeleteServlet" method="post">
+                                        <input type="hidden" name="id" value="${house.id}"/>
+                                        <input type="submit" value="Удалить"/>
+                                    </form>
+                                </td>
 
                             </tr>
                         </core:forEach>
