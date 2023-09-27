@@ -8,5 +8,6 @@ public interface UserService {
     Set<User> read();
     boolean update(int id, String email, String password, String firstName, String lastName, String status);
     boolean delete(int id);
-    User getById(int id);
+    User login(String email, String password);
+
 }

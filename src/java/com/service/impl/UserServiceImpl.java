@@ -7,8 +7,9 @@ import com.model.User;
 import com.service.UserService;
 
 public class UserServiceImpl implements UserService {
+
     UserDao dao;
-    
+
     public UserServiceImpl(UserDao dao) {
         this.dao = dao;
     }
@@ -25,19 +26,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean update(int id, String email, String password, String firstName, String lastName, String status) {
-    	 User updatedUser = new User(id, email, password, firstName, lastName, status);
-    return dao.update(updatedUser) > 0;
+        User updatedUser = new User(id, email, password, firstName, lastName, status);
+        return dao.update(updatedUser) > 0;
     }
 
     @Override
     public boolean delete(int id) {
-    	User user = new User(id);
+        User user = new User(id);
         return dao.delete(user) > 0;
     }
 
-    @Override
-    public User getById(int id) {
-        return dao.read().stream().filter(user -> id == user.id())
-                .collect(toSet()).iterator().next();
-    }    
+    public User login(String email, String password) {
+    return dao.read().stream()
+            .filter(user -> email.equals(user.getEmail()) && password.equals(user.getPassword()))
+            .findFirst()
+            .orElse(null);
+}
 }

@@ -7,7 +7,6 @@ package com.controller.user;
 import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.User;
-import com.service.UserService;
 import java.io.IOException;
 import java.util.Set;
 import javax.servlet.ServletException;

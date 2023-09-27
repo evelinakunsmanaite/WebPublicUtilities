@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Administrator
  */
 @WebServlet(name = "HouseUpdateServlet", urlPatterns = {"/HouseUpdateServlet"})
-public class HouseUpdateServlet extends InitServlet implements Jumpable {  
+public class HouseUpdateServlet extends InitServlet implements Jumpable {
 
- @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Set<House> houses = houseService.read();
@@ -33,33 +33,33 @@ public class HouseUpdateServlet extends InitServlet implements Jumpable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String idString = request.getParameter("id");
-            int id = Integer.parseInt(idString);
+        String idString = request.getParameter("id");
+        int id = Integer.parseInt(idString);
 
-            String userEmail = request.getParameter("userEmail");
+        String userEmail = request.getParameter("userEmail");
 
-            String apartmentNumberString = request.getParameter("apartmentNumber");
-            int apartmentNumber = Integer.parseInt(apartmentNumberString);
+        String apartmentNumberString = request.getParameter("apartmentNumber");
+        int apartmentNumber = Integer.parseInt(apartmentNumberString);
 
-            String apartmentAreaString = request.getParameter("apartmentArea");
-            double apartmentArea = Double.parseDouble(apartmentAreaString);
+        String apartmentAreaString = request.getParameter("apartmentArea");
+        double apartmentArea = Double.parseDouble(apartmentAreaString);
 
-            String floorString = request.getParameter("floor");
-            int floor = Integer.parseInt(floorString);
+        String floorString = request.getParameter("floor");
+        int floor = Integer.parseInt(floorString);
 
-            String roomsCountString = request.getParameter("roomsCount");
-            int roomsCount = Integer.parseInt(roomsCountString);
+        String roomsCountString = request.getParameter("roomsCount");
+        int roomsCount = Integer.parseInt(roomsCountString);
 
-            String street = request.getParameter("street");
+        String street = request.getParameter("street");
 
-            String buildingType = request.getParameter("buildingType");
+        String buildingType = request.getParameter("buildingType");
 
-            String lifeTimeString = request.getParameter("lifeTime");
-            double lifeTime = Double.parseDouble(lifeTimeString);
+        String lifeTimeString = request.getParameter("lifeTime");
+        double lifeTime = Double.parseDouble(lifeTimeString);
 
-        boolean success = houseService.update(id, userEmail,apartmentNumber,apartmentArea,floor,roomsCount,street,buildingType,lifeTime);
-        request.setAttribute("success",  success ? "Данные обновлены" : "Данные не обновлены");
-        jump("/WEB-INF/jsp/result_1.jsp", request, response);        
+        boolean success = houseService.update(id, userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
+        request.setAttribute("success", success ? "Данные обновлены" : "Данные не обновлены");
+        jump("/WEB-INF/jsp/result_1.jsp", request, response);
     }
 
 }

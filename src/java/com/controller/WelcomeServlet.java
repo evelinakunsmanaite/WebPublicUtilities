@@ -9,9 +9,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "WelcomeServlet", urlPatterns = {"/index.html"})//загружается при открытии
 public class WelcomeServlet extends HttpServlet implements Jumpable {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        jump("/WEB-INF/jsp/index.jsp", request, response);//переходит на страницу welcom(начальная)
+        jump("/WEB-INF/jsp/login.jsp", request, response);//переходит на страницу welcom(начальная)
     }
 }

@@ -8,11 +8,9 @@ import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,14 +28,14 @@ public class UserDeleteServlet extends InitServlet implements Jumpable {
         request.setAttribute("users", users);
         jump("/WEB-INF/jsp/deleteUser.jsp", request, response);
     }
-    
-     @Override
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
         int _id = Integer.parseInt(id);
         boolean success = userService.delete(_id);
-        request.setAttribute("success",  success ? "Данные удалены" : "Данные не удалены");
+        request.setAttribute("success", success ? "Данные удалены" : "Данные не удалены");
         jump("/WEB-INF/jsp/result_1.jsp", request, response);
     }
 }
