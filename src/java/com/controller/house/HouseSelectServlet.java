@@ -4,11 +4,13 @@
  */
 package com.controller.house;
 
+import com.controller.InitServlet;
+import com.controller.Jumpable;
+import com.model.House;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,31 +19,47 @@ import javax.servlet.http.HttpServletResponse;
  * @author AdministratorF
  */
 @WebServlet(name = "HouseSelectServlet", urlPatterns = {"/HouseSelectServlet"})
-public class HouseSelectServlet extends HttpServlet {
+public class HouseSelectServlet extends InitServlet implements Jumpable {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HouseSelectServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HouseSelectServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if ("byRoomsCount".equals(action)) {
+            // количество комнат
+            int roomCount = Integer.parseInt(request.getParameter("value"));
+            List<House> houses = houseService.getHousesByRoomCount(roomCount);
+
+            request.setAttribute("houses", houses);
+            jump("/WEB-INF/jsp/showHouseToUser.jsp", request, response);
+            
+        } else if ("byFloorAndRoomsCount".equals(action)) {
+            // этаж и количество комнат
+            String[] values = request.getParameter("value").split("-");
+            if (values.length == 3) {
+                int roomCount = Integer.parseInt(values[0]);
+                int minFloor = Integer.parseInt(values[1]);
+                int maxFloor = Integer.parseInt(values[2]);
+                List<House> houses = houseService.getHousesByRoomCountAndFloorRange(roomCount, minFloor, maxFloor);
+
+                request.setAttribute("houses", houses);
+                jump("/WEB-INF/jsp/showHouseToUser.jsp", request, response);
+                
+            } else {
+                // Обработка неправильного формата ввода пользователем
+                response.sendRedirect("/errorPage.jsp");
+            }
+        } else if ("bySquare".equals(action)) {
+            // площадь
+            double minArea = Double.parseDouble(request.getParameter("value"));
+            List<House> houses = houseService.getHousesByArea(minArea);
+            // Обработка полученных домов, например, передача их на JSP для отображения
+            request.setAttribute("houses", houses);
+            jump("/WEB-INF/jsp/showHouseToUser.jsp", request, response);
+        } else {
+            // Обработка неподдерживаемого действия
+            response.sendRedirect("/errorPage.jsp");
         }
+
+        // Далее, выполните необходимую логику для каждого случая и отправьте ответ
     }
 }

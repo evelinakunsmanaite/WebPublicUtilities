@@ -11,129 +11,53 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
-
-    <style>
-    .bordered {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-    }
-
-    .bordered caption {
-        font-size: 30px;
-        margin-bottom: 10px;
-        color: #007bff; /* Цвет заголовка таблицы */
-        text-align: center; /* Выравнивание заголовка по центру */
-    }
-
-    .bordered tr:hover {
-        background: #fbf8e9;
-        -o-transition: all 0.1s ease-in-out;
-        -webkit-transition: all 0.1s ease-in-out;
-        -moz-transition: all 0.1s ease-in-out;
-        -ms-transition: all 0.1s ease-in-out;
-        transition: all 0.1s ease-in-out;
-    }
-
-    .bordered td, .bordered th {
-        border-left: 1px solid #ccc;
-        border-top: 1px solid #ccc;
-        padding: 10px;
-        text-align: center; /* Выравнивание текста по центру */
-        font-size: 18px; /* Размер шрифта ячеек */
-        vertical-align: middle;
-    }
-
-    .bordered th {
-        background-color: #dce9f9;
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-        background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-        background-image: -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-        background-image: -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-        background-image: -o-linear-gradient(top, #ebf3fc, #dce9f9);
-        background-image: linear-gradient(top, #ebf3fc, #dce9f9);
-        -webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-        -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-        box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-        border-top: none;
-        text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    }
-
-    .bordered td:first-child, .bordered th:first-child {
-        border-left: none;
-    }
-
-    .bordered th:first-child {
-        -moz-border-radius: 6px 0 0 0;
-        -webkit-border-radius: 6px 0 0 0;
-        border-radius: 6px 0 0 0;
-    }
-
-    .bordered th:last-child {
-        -moz-border-radius: 0 6px 0 0;
-        -webkit-border-radius: 0 6px 0 0;
-        border-radius: 0 6px 0 0;
-    }
-
-    .bordered th:only-child{
-        -moz-border-radius: 6px 6px 0 0;
-        -webkit-border-radius: 6px 6px 0 0;
-        border-radius: 6px 6px 0 0;
-    }
-
-    .bordered tr:last-child td:first-child {
-        -moz-border-radius: 0 0 0 6px;
-        -webkit-border-radius: 0 0 0 6px;
-        border-radius: 0 0 0 6px;
-    }
-
-    .bordered tr:last-child td:last-child {
-        -moz-border-radius: 0 0 6px 0;
-        -webkit-border-radius: 0 0 6px 0;
-        border-radius: 0 0 6px 0;
-    }
-    </style>
-</head>
-<body>
-<section class="page-section bg-primary text-white mb-0" id="finder">
-    <div class="container">
-        <div class="table-responsive">
-            <table class="bordered">
-                <caption>Данные домов</caption>
-                <thead>
-                <tr>
-                    <th>id</th>
-                    <th>Email пользователя</th>
-                    <th>Номер квартиры/дома</th>
-                    <th>Площадь квартиры/дома</th>
-                    <th>Этаж</th>
-                    <th>Число комнат</th>
-                    <th>Улица</th>
-                    <th>Тип здания</th>
-                    <th>Срок эксплуатации</th>
-                </tr>
-                </thead>
-                <tbody>
-                <core:forEach var="house" items="${houses}">
-                    <tr>
-                        <td>${house.id}</td>
-                        <td>${house.userEmail}</td>
-                        <td>${house.apartmentNumber}</td>
-                        <td>${house.apartmentArea}</td>
-                        <td>${house.floor}</td>
-                        <td>${house.roomsCount}</td>
-                        <td>${house.street}</td>
-                        <td>${house.buildingType}</td>
-                        <td>${house.lifetime}</td>
-                    </tr>
-                </core:forEach>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <style><%@include file="/resources/css/table.css"%></style>
+    </head>
+    <body>
+        <section class="page-section bg-primary text-white mb-0" id="finder">
+            <div class="container">
+                <div class="table-responsive">
+                    <table class="bordered">
+                        <caption>Данные домов</caption>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Email пользователя</th>
+                                <th>Номер квартиры/дома</th>
+                                <th>Площадь квартиры/дома</th>
+                                <th>Этаж</th>
+                                <th>Число комнат</th>
+                                <th>Улица</th>
+                                <th>Тип здания</th>
+                                <th>Срок эксплуатации</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <core:forEach var="house" items="${houses}">
+                                <tr>
+                                    <td>${house.id}</td>
+                                    <td>${house.userEmail}</td>
+                                    <td>${house.apartmentNumber}</td>
+                                    <td>${house.apartmentArea}</td>
+                                    <td>${house.floor}</td>
+                                    <td>${house.roomsCount}</td>
+                                    <td>${house.street}</td>
+                                    <td>${house.buildingType}</td>
+                                    <td>${house.lifetime}</td>
+                                </tr>
+                            </core:forEach>
+                        </tbody>
+                    </table>
+                </div>
+                  
+                <form action="PageServlet" method="post">
+                    <input type="hidden" name="page" value="toAdmin">
+                    <input type="submit" value="Перейти на главную" class="form-out">
+                </form>
+            </div>
+        </section>
+    </body>
 </html>

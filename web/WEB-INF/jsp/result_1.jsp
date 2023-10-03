@@ -8,8 +8,9 @@
     </head>
     <body>
         <h1>${success}</h1>
-        <form action="index.html">
-            <input type="submit" value="На главную"/>
-        </form>        
+     <form action="PageServlet" method="post">
+            <input type="hidden" name="page" value="toAdmin">
+            <input type="submit" value="Перейти на главную">
+        </form>       
     </body>
 </html>

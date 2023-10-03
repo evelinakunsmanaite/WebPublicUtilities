@@ -41,12 +41,7 @@
             rel="stylesheet" type="text/css" />
 
         <!-- Core theme CSS (includes Bootstrap)-->
-
-        <c:url var="css" value="/css/index-styles.css"></c:url>
-        <link rel="stylesheet" href="${css}" type="text/css"/>
-
-        <c:url var="css" value="/css/index-styles.css"></c:url>
-        <link rel="stylesheet" href="${css}" type="text/css"/>
+        <style><%@include file="/resources/css/table.css"%></style>
 
 
 
@@ -130,40 +125,49 @@
 
 
     </head>
-    <body id="page-top">
+    <body>
+        <section class="page-section bg-primary text-white mb-0" id="finder">
+            <div class="container">
+                <div class="table-responsive">
+                    <form method="post" action="UserUpdateServlet">
+                        <table class="bordered">
+                            <thead>
+                            <th>email</th>
+                            <th>password</th>
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>status</th>
+                            </thead>
+                            <core:forEach var="user" items="${users}">
+                                <tr>
+                                    <td><input type="text" name="email" value="${user.email}" required></td>
+                                    <td><input type="text" name="password" value="${user.password}" required></td>
+                                    <td><input type="text" name="firstName" value="${user.firstName}" required></td>
+                                    <td><input type="text" name="lastName" value="${user.lastName}" required></td>
+                                    <td>
+                                        <select name="status" id="status_${user.status}">
+                                            <option value="user" ${user.status == 'user' ? 'selected' : ''}>Пользователь</option>
+                                            <option value="admin" ${user.status == 'admin' ? 'selected' : ''}>Администратор</option>
+                                        </select>
+                                    </td>
+                                    <input type="hidden" name="id" value="${user.id}" required>
 
-        <form method="post" action="UserUpdateServlet">
-            <table id="housesTable" class="table">
-                <thead>
-                <th>email</th>
-                <th>password</th>
-                <th>firstName</th>
-                <th>lastName</th>
-                <th>status</th>
-                </thead>
-                <core:forEach var="user" items="${users}">
-                    <tr>
-                        <td><input type="text" name="email" value="${user.email}" required></td>
-                        <td><input type="text" name="password" value="${user.password}" required></td>
-                        <td><input type="text" name="firstName" value="${user.firstName}" required></td>
-                        <td><input type="text" name="lastName" value="${user.lastName}" required></td>
-                        <td>
-                            <select name="status" id="status_${user.status}">
-                                <option value="user" ${user.status == 'user' ? 'selected' : ''}>Пользователь</option>
-                                <option value="admin" ${user.status == 'admin' ? 'selected' : ''}>Администратор</option>
-                                </select>
-                        </td>
-                    <td><input type="hidden" name="id" value="${user.id}" required></td>
+                                </tr>
+                            </core:forEach>
+                            </tbody>
+                        </table>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Обновить" />
+                        </div>
+                    </form>
 
-                    </tr>
-                </core:forEach>
-                </tbody>
-            </table>
-            <div class="form-group form-button">
-                <input type="submit" name="signup" id="signup" class="form-submit" value="Обновить" />
+                    <form action="PageServlet" method="post">
+                        <input type="hidden" name="page" value="toAdmin">
+                        <input type="submit" value="Перейти на главную"class="form-out">
+                    </form>
+                </div>
             </div>
-        </form>
-
+        </section>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="js/main.js"></script>      
 

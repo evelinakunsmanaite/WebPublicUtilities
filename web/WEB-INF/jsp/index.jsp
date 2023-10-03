@@ -12,39 +12,6 @@
         <title>JSP Page</title>
         <style><%@include file="/resources/css/style.css"%></style>
 
-        <style>
-            /* Стили для навигационного меню */
-            /* Стили для навигационного меню */
-            .nav-menu {
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-
-            .nav-menu li {
-                margin-bottom: 10px;
-            }
-
-            .nav-menu a {
-                text-decoration: none;
-                color: #333; /* Цвет текста ссылок */
-                display: block;
-                padding: 5px;
-                border-radius: 3px;
-                transition: background-color 0.3s ease;
-                font-size: 18px; /* Увеличенный размер шрифта */
-            }
-
-            .nav-menu a i {
-                margin-right: 10px;
-            }
-
-            .nav-menu a:hover {
-                background-color: #007bff; /* Цвет фона при наведении */
-                color: #fff; /* Цвет текста при наведении */
-            }
-
-        </style>
     </head>
     <body>
 
@@ -104,9 +71,17 @@
                                         <i class="fas fa-edit"></i> Удалить данные дома
                                     </a>
                                 </li>
+                                
+                                   
+                    
+                        <form class="logout-form" action="index.html">
+            <input type="submit" value="Выйти"/>
+                             </form> 
                             </ul>
                         </div>
+                     
                     </div>
+                
                 </div>
             </section>
 
