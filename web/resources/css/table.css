@@ -99,3 +99,23 @@
     cursor: pointer;
     width: 90%;
 }
+
+    input[type="text"],
+            select {
+                width: 90%;
+                padding: 10px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 15px;
+            }
+            
+                input[type="number"],
+            select {
+                width: 90%;
+                padding: 10px;
+                margin: 5px 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                font-size: 15px;
+            }

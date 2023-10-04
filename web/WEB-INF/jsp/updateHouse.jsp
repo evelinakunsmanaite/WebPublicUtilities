@@ -49,9 +49,11 @@
 
     </head>
     <body>
-
+        <section class="page-section bg-primary text-white mb-0" id="finder">
+            <div class="container">
+                <div class="table-responsive">
         <form method="post" action="HouseUpdateServlet">
-            <table id="housesTable" class="table">
+            <table class="bordered">
                 <thead>
                     <tr>
                         <th>Email пользователя</th>
@@ -90,14 +92,17 @@
                 </tbody>
             </table>
             <div class="form-group form-button">
-                <input type="submit" name="signup" id="signup" class="form-submit" value="Обновить" />
-            </div>
-        </form>
-
+                <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
+                        </div>
+                    </form>
+<br><br>
         <form action="PageServlet" method="post">
             <input type="hidden" name="page" value="toAdmin">
             <input type="submit" value="Перейти на главную" class="form-out">
         </form>
+                     </div>
+            </div>
+        </section>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="js/main.js"></script>      
 

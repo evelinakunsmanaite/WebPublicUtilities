@@ -34,8 +34,9 @@ if (loggedInUser != null) {
         jump("/WEB-INF/jsp/user.jsp", request, response);
     }
 } else {
-    // Перенаправьте на страницу с сообщением об ошибке входа
-    response.sendRedirect("/loginError.jsp");
-}    }
+                request.setAttribute("status", "failed");
+request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+
+            }  }
     
 }

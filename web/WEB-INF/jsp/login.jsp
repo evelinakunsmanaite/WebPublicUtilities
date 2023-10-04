@@ -9,10 +9,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Sign Up Form by Colorlib</title>
-        <c:url var="css" value="/resources/css/style.css"></c:url>
-        <link rel="stylesheet" href="${css}" type="text/css"/>
+       
 <style><%@include file="/resources/fonts/material-icon/css/material-design-iconic-font.min.css"%>
-<%@include file="/resources/css/style.css"%></style>
+<%@include file="/resources/css/style.css"%>
+
+<%@include file="/resources/css/modal.css"%>
+
+
+</style>
     </head>
     <body>
 
@@ -38,12 +42,12 @@
                                   id="login-form">
                                 <div class="form-group">
                                     <label for="useremail">
-                                        <i class="zmdi zmdi-email"></i></label> <input
+                                        </label> <input
                                         type="email" name="useremail" id="useremail"
                                         placeholder="Your email" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="password"><i class="zmdi zmdi-lock"></i></label> <input
+                                    <label for="password"></label> <input
                                         type="password" name="password" id="password"
                                         placeholder="Password" />
                                 </div>
@@ -60,19 +64,39 @@
             </section>
 
         </div>
+        
+        <div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <p>Неверные данные. Пожалуйста, попробуйте еще раз.</p>
+    </div>
+</div>
 
         <!-- JS -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="js/main.js"></script>
-
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <link rel="stylesheet" href="alert/dist/sweetalert.css">
-
+ 
         <script type="text/javascript">
-            var status = document.getElementById("status").value;
-            if (status == "failed") {
-                swal("Sorry", "Wrong Email or Password", "error");
-            }
+          var modal = document.getElementById('myModal');
+var closeModalButton = document.getElementById('closeModal');
+
+function showInvalidDataModal() {
+    modal.style.display = 'block';
+}
+
+closeModalButton.onclick = function() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// Проверьте атрибут "status" и вызовите showInvalidDataModal() при "failed"
+var status = document.getElementById("status").value;
+if (status == "failed") {
+    showInvalidDataModal();
+}
         </script>
 
     </body>

@@ -43,87 +43,7 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <style><%@include file="/resources/css/table.css"%></style>
 
-
-
         <title>JSP Page</title>
-        <style>
-            .table {
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 250px;
-                width: 70%;
-                border: none;
-                margin-bottom: 20px;
-                border-collapse: separate;
-            }
-
-            .table thead th {
-                font-weight: bold;
-                text-align: left;
-                border: none;
-                padding: 10px 15px;
-                background: #7c7182;
-                font-size: 14px;
-                border-top: 1px solid #ddd;
-            }
-
-            .table tr th:first-child,
-            .table tr td:first-child {
-                border-left: 1px solid #ddd;
-            }
-
-            .table tr th:last-child,
-            .table tr td:last-child {
-                border-right: 1px solid #ddd;
-            }
-
-            .table thead tr th:first-child {
-                border-radius: 20px 0 0 0;
-            }
-
-            .table thead tr th:last-child {
-                border-radius: 0 20px 0 0;
-            }
-
-            .table tbody td {
-                text-align: left;
-                border: none;
-                padding: 10px 15px;
-                font-size: 12px;
-                vertical-align: top;
-            }
-
-            .table tbody tr:nth-child(even) {
-                background: #a69cad;
-            }
-
-            .table tbody tr:nth-child(odd) {
-                background: #bdb1c4;
-            }
-
-            .table tbody tr:last-child td {
-                border-bottom: 1px solid #ddd;
-            }
-
-            .table tbody tr:last-child td:first-child {
-                border-radius: 0 0 0 20px;
-            }
-
-            .table tbody tr:last-child td:last-child {
-                border-radius: 0 0 20px 0;
-            }
-
-            .form-group input[type="submit"] {
-                background-color: rgb(67, 60, 71);
-                color: white;
-                border: none;
-                border-radius: 5px;
-                padding: 10px 20px;
-                cursor: pointer;
-            }
-        </style>
-
-
     </head>
     <body>
         <section class="page-section bg-primary text-white mb-0" id="finder">
@@ -133,10 +53,10 @@
                         <table class="bordered">
                             <thead>
                             <th>email</th>
-                            <th>password</th>
-                            <th>firstName</th>
-                            <th>lastName</th>
-                            <th>status</th>
+                            <th>пароль</th>
+                            <th>имя</th>
+                            <th>фалилия</th>
+                            <th>статус</th>
                             </thead>
                             <core:forEach var="user" items="${users}">
                                 <tr>
@@ -150,17 +70,19 @@
                                             <option value="admin" ${user.status == 'admin' ? 'selected' : ''}>Администратор</option>
                                         </select>
                                     </td>
-                                    <input type="hidden" name="id" value="${user.id}" required>
+                                <input type="hidden" name="id" value="${user.id}" required>
 
                                 </tr>
                             </core:forEach>
                             </tbody>
                         </table>
+                        
+                        
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Обновить" />
+                            <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
                         </div>
                     </form>
-
+<br><br>
                     <form action="PageServlet" method="post">
                         <input type="hidden" name="page" value="toAdmin">
                         <input type="submit" value="Перейти на главную"class="form-out">

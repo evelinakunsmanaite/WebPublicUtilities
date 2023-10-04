@@ -35,85 +35,94 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
 
-        <c:url var="css" value="/css/index-styles.css"></c:url>
-        <link rel="stylesheet" href="${css}" type="text/css"/>
-
         <style>
 
-
-            .input-form {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                height: 20vh;
+            body {
+                background-color: #b6d0ff;
             }
 
-            .input-form label {
-                font-size: 18px;
+  .input-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+}
 
+.input-form label {
+    font-size: 18px;
+    color: white; /* Основной синий цвет */
+    
+}
 
-            }
+.input-form .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-            .input-form .input-container {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+.input-form input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid white; /* Основной синий цвет для границы */
+    border-radius: 4px;
+    margin-right: 10px;
+    transition: border-color 0.3s ease;
+    width: 800px;
+}
 
-            .input-form input[type="text"] {
-                padding: 10px;
-                font-size: 16px;
-                border: 2px solid #ccc;
-                border-radius: 4px;
-                margin-right: 10px;
-                transition: border-color 0.3s ease;
-                width: 800px;
-            }
+form {
+    display: table;
+    margin: 0 auto;
+    margin-bottom: -35px;
+    background-color: #1a2847; /* Фоновый цвет */
+    padding: 20px;
+    border-radius: 10px;
+}
 
+label {  
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black; /* Основной синий цвет для текста */
+    margin-top: -20px;
+}
 
+.input-container {
+    display: flex;
+    align-items: center;
+}
 
-            form {
-                display: table;
-                margin: 0 auto;
-                margin-bottom: 20px;
-                background-color: #a69cad;
-                padding: 10px;
-                border-radius: 10px;
-            }
+.input-container input[type="text"],
+.input-container input[type="submit"] {
+    margin-right: 10px;
+}
 
-            label {
-                display: block;
-                font-weight: bold;
-                margin-bottom: 10px;
-                color: rgb(67, 60, 71);
+input[type="text"] {
+    padding: 5px;
+    border: none;
+    border-radius: 4px;
+}
 
-            }
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #415792; /* Основной синий цвет для фона */
+    color: white; /* Белый цвет для текста на кнопке */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+p{
+    font-size: 20px;
+    color: white; /* Основной синий цвет */
+    margin-top: 30px;
+}
 
-            .input-container {
-                display: flex;
-                align-items: center;
-            }
-
-            .input-container input[type="text"],
-            .input-container input[type="submit"] {
-                margin-right: 10px;
-            }
-
-            input[type="text"] {
-                padding: 5px;
-                border: none;
-                border-radius: 4px;
-            }
-
-            input[type="submit"] {
-                padding: 5px 10px;
-                background-color: #7c7182;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-            }
+h1 {
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 40px;
+    color: #1a2847;
+}
 
         </style>
 
@@ -125,12 +134,11 @@
         <section class="page-section" id="adder">
             <div class="container">
 
-                <h2
-                    class="page-section-heading text-center text-uppercase text-secondary mb-0">Получить данные</h2>
-
+                <h1>Получить данные</h1>
+           
                 <form class="input-form" action="HouseSelectServlet" method="post">
                     <input type="hidden" name="action" value="byRoomsCount">
-                    <label for="value">Вывести список домов с заданным количеством комнат:
+                    <label for="value"><p>Вывести список домов с заданным количеством комнат:</p>
                         <div class="input-container">
                             <input type="text" name="value" required placeholder="Введите количество комнат">
                             <input type="submit" value="Отправить">
@@ -139,7 +147,7 @@
 
                 <form class="input-form" action="HouseSelectServlet" method="post">
                     <input type="hidden" name="action" value="byFloorAndRoomsCount">
-                    <label for="value">Вывести домов больше заданным количеством комнат и интервалом этажей:
+                    <label for="value"><p>Вывести домов больше заданным количеством комнат и интервалом этажей:</p>
                         <div class="input-container">
                             <input type="text" name="value" required placeholder="Введите через количество комнат и интервал этажей. Пример(количество комнат-от-до): 1-1-1">
                             <input type="submit" value="Отправить">
@@ -148,13 +156,13 @@
 
                 <form class="input-form" action="HouseSelectServlet" method="post">
                     <input type="hidden" name="action" value="bySquare">
-                    <label for="value">Вывести список домов где площадь больше заданной:
+                    <label for="value"> <p >Вывести список домов где площадь больше заданной:</p>
                         <div class="input-container">
                             <input type="text" name="value" required placeholder="Введите площадь">
                             <input type="submit" value="Отправить">
                         </div></label>
-                </form>      
-
+                </form>     
+         
                 <script type="text/javascript">
                     var status = document.getElementById("status").value;
                     if (status == "failed") {

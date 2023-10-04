@@ -26,10 +26,10 @@
                         <thead>
                         <th>id</th>
                         <th>email</th>
-                        <th>password</th>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>status</th>
+                        <th>пароль</th>
+                        <th>имя</th>
+                        <th>фамилия</th>
+                        <th>статус</th>
                         </thead>
                         <core:forEach var="user" items="${users}">
                             <tr>
