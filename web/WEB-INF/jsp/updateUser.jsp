@@ -1,9 +1,3 @@
-<%-- 
-    Document   : updateHouse
-    Created on : 25 сент. 2023 г., 13:53:06
-    Author     : Administrator
---%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -45,7 +39,7 @@
 
         <title>JSP Page</title>
     </head>
-    <body>
+     <body>
         <section class="page-section bg-primary text-white mb-0" id="finder">
             <div class="container">
                 <div class="table-responsive">
@@ -53,10 +47,10 @@
                         <table class="bordered">
                             <thead>
                             <th>email</th>
-                            <th>пароль</th>
-                            <th>имя</th>
-                            <th>фалилия</th>
-                            <th>статус</th>
+                            <th>password</th>
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>status</th>
                             </thead>
                             <core:forEach var="user" items="${users}">
                                 <tr>
@@ -70,25 +64,22 @@
                                             <option value="admin" ${user.status == 'admin' ? 'selected' : ''}>Администратор</option>
                                         </select>
                                     </td>
-                                <input type="hidden" name="id" value="${user.id}" required>
-
+                                    <input type="hidden" name="id" value="${user.id}" required>
                                 </tr>
                             </core:forEach>
                             </tbody>
                         </table>
-                        
-                        
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Обновить" />
                         </div>
                     </form>
-<br><br>
                     <form action="PageServlet" method="post">
                         <input type="hidden" name="page" value="toAdmin">
                         <input type="submit" value="Перейти на главную"class="form-out">
                     </form>
                 </div>
             </div>
+       
         </section>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="js/main.js"></script>      

@@ -42,7 +42,10 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
 
-           <style><%@include file="/resources/css/table.css"%></style>
+           <style><%@include file="/resources/css/table.css"%>
+                       <%@include file="/resources/css/modal.css"%>
+
+           </style>
 
 
         <title>JSP Page</title>
@@ -109,14 +112,7 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <link rel="stylesheet" href="alert/dist/sweetalert.css">
-
-        <script type="text/javascript">
-            var status = document.getElementById("status").value;
-            if (status == "success") {
-                swal("Поздравляю", "Данные успешно обновлены", "success");
-            } else if (status == "failed") {
-                swal("Ошибка!", "Неверный ввод данных", "error");
-            }
+  
         </script>
 
     </body>

@@ -60,6 +60,6 @@ public class HouseUpdateServlet extends InitServlet implements Jumpable {
         boolean success = houseService.update(id, userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
         request.setAttribute("success", success ? "Данные обновлены" : "Данные не обновлены");
         jump("/WEB-INF/jsp/result_1.jsp", request, response);
-    }
+           }
 
 }
