@@ -18,28 +18,12 @@
 
 
         <title>Freelancer - Start Bootstrap Theme</title>
-
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-        crossorigin="anonymous"></script>
-
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-              rel="stylesheet" type="text/css" />
-
-        <link
-            href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-            rel="stylesheet" type="text/css" />
-
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <style><%@include file="/resources/css/table.css"%></style>
-
+     <style><%@include file="/resources/css/table.css"%>
+                       <%@include file="/resources/css/modal.css"%>
+                      </style>
         <title>JSP Page</title>
     </head>
-     <body>
+    <body>
         <section class="page-section bg-primary text-white mb-0" id="finder">
             <div class="container">
                 <div class="table-responsive">
@@ -54,32 +38,32 @@
                             </thead>
                             <core:forEach var="user" items="${users}">
                                 <tr>
-                                    <td><input type="text" name="email" value="${user.email}" required></td>
-                                    <td><input type="text" name="password" value="${user.password}" required></td>
-                                    <td><input type="text" name="firstName" value="${user.firstName}" required></td>
-                                    <td><input type="text" name="lastName" value="${user.lastName}" required></td>
+                                    <td><input type="text" name="email_${user.id}" value="${user.email}" required></td>
+                                    <td><input type="text" name="password_${user.id}" value="${user.password}" required></td>
+                                    <td><input type="text" name="firstName_${user.id}" value="${user.firstName}" required></td>
+                                    <td><input type="text" name="lastName_${user.id}" value="${user.lastName}" required></td>
                                     <td>
-                                        <select name="status" id="status_${user.status}">
+                                        <select name="status_${user.id}" id="status_${user.status}">
                                             <option value="user" ${user.status == 'user' ? 'selected' : ''}>Пользователь</option>
                                             <option value="admin" ${user.status == 'admin' ? 'selected' : ''}>Администратор</option>
                                         </select>
                                     </td>
-                                    <input type="hidden" name="id" value="${user.id}" required>
+                                <input type="hidden" name="id" value="${user.id}" required>
                                 </tr>
                             </core:forEach>
-                            </tbody>
                         </table>
-                        <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" class="form-submit" value="Обновить" />
+                     <div class="form-group form-button">
+                <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
                         </div>
                     </form>
+<br><br>
                     <form action="PageServlet" method="post">
                         <input type="hidden" name="page" value="toAdmin">
                         <input type="submit" value="Перейти на главную"class="form-out">
                     </form>
                 </div>
             </div>
-       
+
         </section>
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="js/main.js"></script>      

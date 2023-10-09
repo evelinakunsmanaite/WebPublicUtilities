@@ -41,6 +41,4 @@ public record User(int id, String email, String password, String firstName, Stri
     public String getStatus() {
         return status;
     }
-    
-
 }
