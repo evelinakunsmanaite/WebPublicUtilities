@@ -10,8 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <style><%@include file="/resources/css/styleAdminShow.css"%></style>
-        <style><%@include file="/resources/css/styleCreateHouse.css"%></style>
+        <style><%@include file="/resources/css/styleAdminShow.css"%>
+            <%@include file="/resources/css/styleCreateHouse.css"%>
+            <%@include file="/resources/css/modal.css"%></style>
+
 
     </head>
     <body>
@@ -49,37 +51,37 @@
                                                         <div class="form-group">
                                                             <label for="userEmail"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="text" name="userEmail" id="userEmail" placeholder="Введите email пользователя" />
+                                                                type="text" name="userEmail" id="userEmail" placeholder="Введите email пользователя" required/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="apartmentNumber"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="number" min="0" name="apartmentNumber" id="apartmentNumber" placeholder="Введите номер квартиры/дома" />
+                                                                type="number" min="0" name="apartmentNumber" id="apartmentNumber" placeholder="Введите номер квартиры/дома" required/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="apartmentArea"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="number" step="0.01" min="0" name="apartmentArea" id="apartmentArea" placeholder="Введите площадь квартиры/дома" />
+                                                                type="number" step="0.01" min="0" name="apartmentArea" id="apartmentArea" placeholder="Введите площадь квартиры/дома" required/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="floor"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="number" min="0" name="floor" id="floor" placeholder="Введите этаж" />
+                                                                type="number" min="0" name="floor" id="floor" placeholder="Введите этаж" required/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="roomsCount"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="number" min="0" name="roomsCount" id="roomsCount" placeholder="Введите количество комнат" />
+                                                                type="number" min="0" name="roomsCount" id="roomsCount" placeholder="Введите количество комнат" required/>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="street"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="text" name="street" id="street" placeholder="Введите улицу" />
+                                                                type="text" name="street" id="street" placeholder="Введите улицу" required/>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="buildingType"><i class="zmdi zmdi-account-box"></i></label>
-                                                            <select name="buildingType" id="buildingType">
+                                                            <select name="buildingType" id="buildingType" required>
                                                                 <option value="" disabled selected hidden>Выберите тип здания</option>
                                                                 <option value="Жилое здание">Жилое здание</option>
                                                                 <option value="Общественное здание">Общественное здание</option>
@@ -92,7 +94,7 @@
                                                         <div class="form-group">
                                                             <label for="lifeTime"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="number" min="0" name="lifeTime" id="lifeTime" placeholder="Введите срок эксплуатации" />
+                                                                type="number" min="0" name="lifeTime" id="lifeTime" placeholder="Введите срок эксплуатации" required/>
                                                         </div>
                                                         <br>
                                                         <div class="form-group form-button">
@@ -110,6 +112,44 @@
                         </div>                              
                     </div>
                 </div>
-        </section>
-    </body>
-</html>
+
+
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span id="closeModal" class="close">&times;</span>
+                        <p></p>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    var modal = document.getElementById('myModal');
+                    var closeModalButton = document.getElementById('closeModal');
+                    var messageElement = document.querySelector('.modal-content p');
+
+                    function showStatusModal() {
+                        modal.style.display = 'block';
+                    }
+
+                    closeModalButton.onclick = function () {
+                        modal.style.display = 'none';
+                    }
+
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
+                            modal.style.display = 'none';
+                        }
+                    }
+
+                    var status = '<%= request.getAttribute("status")%>';
+                    var message = ''; // Установите сообщение в соответствии с вашими требованиями
+
+                    if (status == "failed") {
+                        messageElement.innerText = message; // Установите сообщение об ошибке
+                        showStatusModal();
+                    } else if (status == "success") {
+                        messageElement.innerText = "Вы успешно зарегистрированы."; // Установите успешное сообщение
+                        showStatusModal();
+                    }
+                </script>
+                </body>
+                </html>

@@ -43,7 +43,7 @@ public class UserUpdateServlet extends InitServlet implements Jumpable {
         // Вы можете выполнить какие-либо дополнительные действия здесь, в зависимости от результатов обновления
     }
         request.setAttribute("success", success ? "Данные обновлены" : "Данные не обновлены");
-        jump("/WEB-INF/jsp/result_1.jsp", request, response);
+        jump("/WEB-INF/jsp/result.jsp", request, response);
  
 
     }

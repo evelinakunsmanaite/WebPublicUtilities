@@ -27,6 +27,13 @@ public class HouseReadServlet extends InitServlet implements Jumpable {
         Set<House> houses = houseService.read();
 
         request.setAttribute("houses", houses);
-        jump("/WEB-INF/jsp/showHouses.jsp", request, response);
+
+        if (houses.isEmpty()) {
+            String success = "Данные отсудствуют";
+            request.setAttribute("success", success);
+            jump("/WEB-INF/jsp/result.jsp", request, response);
+        } else jump("/WEB-INF/jsp/showHouses.jsp", request, response);
+        }
     }
-}
+
+

@@ -10,8 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <style><%@include file="/resources/css/styleAdminShow.css"%></style>
-        <style><%@include file="/resources/css/styleCreateUser.css"%></style>
+        <style><%@include file="/resources/css/styleAdminShow.css"%>
+            <%@include file="/resources/css/styleCreateUser.css"%>
+            <%@include file="/resources/css/modal.css"%></style>
+
     </head>
     <body>
     <body>
@@ -53,30 +55,30 @@
                                                         <div class="form-group">
                                                             <label for="firstNname"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="text" name="firstNname" id="firstNname"  placeholder="Введите имя" />
+                                                                type="text" name="firstNname" id="firstNname"  placeholder="Введите имя" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="lastNname"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="text" name="lastNname" id="lastNname" placeholder="Введите фамилию" />
+                                                                type="text" name="lastNname" id="lastNname" placeholder="Введите фамилию" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="email"><i class="zmdi zmdi-email"></i></label> <input
-                                                                type="email" name="email" id="email" placeholder="Введите email" />
+                                                                type="email" name="email" id="email" placeholder="Введите email" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
-                                                                type="password" name="pass" id="pass" placeholder="Введите пароль" />
+                                                                type="password" name="pass" id="pass" placeholder="Введите пароль" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                                             <input type="password" name="re_pass" id="re_pass"
-                                                                   placeholder="Подтвердите пароль" />
+                                                                   placeholder="Подтвердите пароль" required/>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="status"><i class="zmdi zmdi-account-box"></i></label>
-                                                            <select name="status" id="status">
+                                                            <select name="status" id="status" required>
                                                                 <option value="" disabled selected hidden>Выберите статус</option>
                                                                 <option value="user">Пользователь</option>
                                                                 <option value="admin">Администратор</option>
@@ -97,8 +99,47 @@
                         </div>                              
                     </div>
                 </div>
-                                </div>
+            </div>
 
         </section>
+
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <p></p>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var modal = document.getElementById('myModal');
+            var closeModalButton = document.getElementById('closeModal');
+            var messageElement = document.querySelector('.modal-content p');
+
+            function showStatusModal() {
+                modal.style.display = 'block';
+            }
+
+            closeModalButton.onclick = function () {
+                modal.style.display = 'none';
+            }
+
+            window.onclick = function (event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+
+            var status = '<%= request.getAttribute("status")%>';
+            var message = ''; // Установите сообщение в соответствии с вашими требованиями
+
+            if (status == "failed") {
+                messageElement.innerText = message; // Установите сообщение об ошибке
+                showStatusModal();
+            } else if (status == "success") {
+                messageElement.innerText = "Вы успешно зарегистрированы."; // Установите успешное сообщение
+                showStatusModal();
+            }
+        </script>
+
     </body>
 </html>

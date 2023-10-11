@@ -67,7 +67,7 @@
         <div id="myModal" class="modal">
             <div class="modal-content">
                 <span class="close" id="closeModal">&times;</span>
-                <p>Неверные данные. Пожалуйста, попробуйте еще раз.</p>
+                <p>Данные не зарегестрированы. Попробуйте ещё раз</p>
             </div>
         </div>
 

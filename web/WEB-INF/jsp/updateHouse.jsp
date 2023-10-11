@@ -42,10 +42,10 @@
 
         <!-- Core theme CSS (includes Bootstrap)-->
 
-           <style><%@include file="/resources/css/table.css"%>
-                       <%@include file="/resources/css/modal.css"%>
+        <style><%@include file="/resources/css/table.css"%>
+            <%@include file="/resources/css/modal.css"%>
 
-           </style>
+        </style>
 
 
         <title>JSP Page</title>
@@ -55,58 +55,58 @@
         <section class="page-section bg-primary text-white mb-0" id="finder">
             <div class="container">
                 <div class="table-responsive">
-    <form method="post" action="HouseUpdateServlet">
-    <table class="bordered">
-        <thead>
-            <tr>
-                <th>Email пользователя</th>
-                <th>Номер квартиры/дома</th>
-                <th>Площадь квартиры/дома</th>
-                <th>Этаж</th>
-                <th>Число комнат</th>
-                <th>Улица</th>
-                <th>Тип здания</th>
-                <th>Срок эксплуатации</th>
-                <th>Действие</th>
-            </tr>
-        </thead>
-        <tbody>
-            <core:forEach var="house" items="${houses}">
-                <tr>
-                    <td><input type="text" name="userEmail_${house.id}" value="${house.userEmail}" required></td>
-                    <td><input type="number" min="0" name="apartmentNumber_${house.id}" value="${house.apartmentNumber}" required></td>
-                    <td><input type="number" min="0" step="0.01" name="apartmentArea_${house.id}" value="${house.apartmentArea}" required></td>
-                    <td><input type="number" min="0" name="floor_${house.id}" value="${house.floor}" required></td>
-                    <td><input type="number" min="0" name="roomsCount_${house.id}" value="${house.roomsCount}" required></td>
-                    <td><input type="text" name="street_${house.id}" value="${house.street}" required></td>
-                    <td>
-                        <select name="buildingType_${house.id}" id="buildingType_${house.id}">
-                            <option value="Жилое здание" ${house.buildingType == 'Жилое здание' ? 'selected' : ''}>Жилое здание</option>
-                            <option value="Общественное здание" ${house.buildingType == 'Общественное здание' ? 'selected' : ''}>Общественное здание</option>
-                            <option value="Промышленное здание" ${house.buildingType == 'Промышленное здание' ? 'selected' : ''}>Промышленное здание</option>
-                            <option value="Сельскохозяйственное здание" ${house.buildingType == 'Сельскохозяйственное здание' ? 'selected' : ''}>Сельскохозяйственное здание</option>
-                            <option value="Складское здание" ${house.buildingType == 'Складское здание' ? 'selected' : ''}>Складское здание</option>
-                        </select>
-                    </td>
-                    <td><input type="number" min="0" step="0.01" name="lifeTime_${house.id}" value="${house.lifetime}" required></td>
-                    <td>
-                        <button type="submit" name="id" value="${house.id}" class="form-submit">Обновить</button>
-                    </td>
-                </tr>
-            </core:forEach>
-        </tbody>
-    </table>
-    <div class="form-group form-button">
-        <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
-    </div>
-</form>
+                    <form method="post" action="HouseUpdateServlet">
+                        <table class="bordered">
+                            <thead>
+                                <tr>
+                                    <th>Email пользователя</th>
+                                    <th>Номер квартиры/дома</th>
+                                    <th>Площадь квартиры/дома</th>
+                                    <th>Этаж</th>
+                                    <th>Число комнат</th>
+                                    <th>Улица</th>
+                                    <th>Тип здания</th>
+                                    <th>Срок эксплуатации</th>
+                                    <th>Действие</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <core:forEach var="house" items="${houses}">
+                                    <tr>
+                                        <td><input type="text" name="userEmail_${house.id}" value="${house.userEmail}" required></td>
+                                        <td><input type="number" min="0" name="apartmentNumber_${house.id}" value="${house.apartmentNumber}" required></td>
+                                        <td><input type="number" min="0" step="0.01" name="apartmentArea_${house.id}" value="${house.apartmentArea}" required></td>
+                                        <td><input type="number" min="0" name="floor_${house.id}" value="${house.floor}" required></td>
+                                        <td><input type="number" min="0" name="roomsCount_${house.id}" value="${house.roomsCount}" required></td>
+                                        <td><input type="text" name="street_${house.id}" value="${house.street}" required></td>
+                                        <td>
+                                            <select name="buildingType_${house.id}" id="buildingType_${house.id}">
+                                                <option value="Жилое здание" ${house.buildingType == 'Жилое здание' ? 'selected' : ''}>Жилое здание</option>
+                                                <option value="Общественное здание" ${house.buildingType == 'Общественное здание' ? 'selected' : ''}>Общественное здание</option>
+                                                <option value="Промышленное здание" ${house.buildingType == 'Промышленное здание' ? 'selected' : ''}>Промышленное здание</option>
+                                                <option value="Сельскохозяйственное здание" ${house.buildingType == 'Сельскохозяйственное здание' ? 'selected' : ''}>Сельскохозяйственное здание</option>
+                                                <option value="Складское здание" ${house.buildingType == 'Складское здание' ? 'selected' : ''}>Складское здание</option>
+                                            </select>
+                                        </td>
+                                        <td><input type="number" min="0" step="0.01" name="lifeTime_${house.id}" value="${house.lifetime}" required></td>
+                                        <td>
+                                            <button type="submit" name="id" value="${house.id}" class="form-submit">Обновить</button>
+                                        </td>
+                                    </tr>
+                                </core:forEach>
+                            </tbody>
+                        </table>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
+                        </div>
+                    </form>
 
-<br><br>
-        <form action="PageServlet" method="post">
-            <input type="hidden" name="page" value="toAdmin">
-            <input type="submit" value="Перейти на главную" class="form-out">
-        </form>
-                     </div>
+                    <br><br>
+                    <form action="PageServlet" method="post">
+                        <input type="hidden" name="page" value="toAdmin">
+                        <input type="submit" value="Перейти на главную" class="form-out">
+                    </form>
+                </div>
             </div>
         </section>
         <script src="vendor/jquery/jquery.min.js"></script>
@@ -115,8 +115,8 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <link rel="stylesheet" href="alert/dist/sweetalert.css">
-  
-        </script>
 
-    </body>
+    </script>
+
+</body>
 </html>

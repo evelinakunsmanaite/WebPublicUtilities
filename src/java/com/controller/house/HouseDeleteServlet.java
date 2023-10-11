@@ -33,10 +33,11 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        int _id = Integer.parseInt(id);
-        boolean success = houseService.delete(_id);
-        request.setAttribute("success", success ? "Данные удалены" : "Данные не удалены");
-        jump("/WEB-INF/jsp/result_1.jsp", request, response);
+        String idStr = request.getParameter("id");
+        int id = Integer.parseInt(idStr);
+        
+        boolean success = houseService.delete(id);
+         request.setAttribute("success", success ? "Данные удалены" : "Данные не удалены");
+        jump("/WEB-INF/jsp/result.jsp", request, response);
     }
 }

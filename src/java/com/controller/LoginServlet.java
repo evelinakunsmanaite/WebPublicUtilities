@@ -18,25 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends InitServlet implements Jumpable {
 
-  @Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String email = request.getParameter("useremail");
+        String email = request.getParameter("useremail");
         String password = request.getParameter("password");
-                User loggedInUser = userService.login(email, password);
-if (loggedInUser != null) {
-    if ("admin".equals(loggedInUser.getStatus())) {
-        // Перенаправьте на страницу администратора
-        jump("/WEB-INF/jsp/index.jsp", request, response);
-    } else {
-        // Перенаправьте на страницу пользователя
-        
-        jump("/WEB-INF/jsp/user.jsp", request, response);
-    }
-} else {
-                request.setAttribute("status", "failed");
-request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+        User loggedInUser = userService.login(email, password);
+        if (loggedInUser != null) {
+            if ("admin".equals(loggedInUser.getStatus())) {
+                // Перенаправьте на страницу администратора
+                jump("/WEB-INF/jsp/index.jsp", request, response);
+            } else {
+                // Перенаправьте на страницу пользователя
 
-            }  }
-    
+                jump("/WEB-INF/jsp/user.jsp", request, response);
+            }
+        } else {
+            request.setAttribute("status", "failed");
+            request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
+
+        }
+    }
+
 }

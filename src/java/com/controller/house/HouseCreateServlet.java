@@ -52,8 +52,11 @@ public class HouseCreateServlet extends InitServlet implements Jumpable {
         House house = new House(userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
 
         boolean success = houseService.create(house);
-        request.setAttribute("success", success ? "Данные добавлены" : "Данные не добавлены");
-        jump("/WEB-INF/jsp/result_1.jsp", request, response);
+        
+        if (success) request.setAttribute("status", "success");
+        else request.setAttribute("status", "failed");
+        
+        request.getRequestDispatcher("/WEB-INF/jsp/createHouse.jsp").forward(request, response);
     }
 
 }

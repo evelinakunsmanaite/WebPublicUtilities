@@ -36,6 +36,6 @@ public class UserDeleteServlet extends InitServlet implements Jumpable {
         int _id = Integer.parseInt(id);
         boolean success = userService.delete(_id);
         request.setAttribute("success", success ? "Данные удалены" : "Данные не удалены");
-        jump("/WEB-INF/jsp/result_1.jsp", request, response);
+        jump("/WEB-INF/jsp/result.jsp", request, response);
     }
 }
