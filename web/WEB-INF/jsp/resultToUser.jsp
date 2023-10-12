@@ -12,7 +12,7 @@
     <body>
         <h1>${success}</h1>
         <form action="PageServlet" method="post">
-            <input type="hidden" name="page" value="toAdmin">
+            <input type="hidden" name="page" value="toUser">
             <input type="submit" value="Перейти на главную">
         </form>       
     </body>

@@ -16,25 +16,6 @@
 
 
         <title>Freelancer - Start Bootstrap Theme</title>
-
-
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
-        crossorigin="anonymous"></script>
-
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-              rel="stylesheet" type="text/css" />
-
-        <link
-            href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-            rel="stylesheet" type="text/css" />
-
-        <!-- Core theme CSS (includes Bootstrap)-->
-
         <style>
 
             body {
@@ -63,6 +44,8 @@
 
 .input-form input[type="text"] {
     padding: 10px;
+        color: #1a2847;
+
     font-size: 16px;
     border: 2px solid white; /* Основной синий цвет для границы */
     border-radius: 4px;
@@ -75,7 +58,6 @@ form {
     display: table;
     margin: 0 auto;
     margin-bottom: -35px;
-    background-color: #1a2847; /* Фоновый цвет */
     padding: 20px;
     border-radius: 10px;
 }
@@ -114,7 +96,8 @@ input[type="submit"] {
 }
 p{
     font-size: 20px;
-    color: white; /* Основной синий цвет */
+        color: #1a2847;
+ /* Основной синий цвет */
     margin-top: 30px;
 }
 
@@ -135,7 +118,7 @@ h1 {
             <div class="container">
 
                 <h1>Получить данные</h1>
-           
+        
                 <form class="input-form" action="HouseSelectServlet" method="post">
                     <input type="hidden" name="action" value="byRoomsCount">
                     <label for="value"><p>Вывести список домов с заданным количеством комнат:</p>
