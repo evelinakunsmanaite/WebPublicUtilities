@@ -3,8 +3,8 @@ package com.service.impl;
 import com.dao.HouseDao;
 import com.model.House;
 import java.util.Set;
-import static java.util.stream.Collectors.toSet;
 import com.service.HouseService;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,13 +27,17 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public boolean update(int id, String userEmail, int apartmentNumber, double apartmentArea, int floor, int roomsCount, String street, String buildingType, double lifeTime) {
-        House updatedHouse = new House(id, userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
+    public boolean update(int id, String userEmail, int apartmentNumber,
+            double apartmentArea, int floor, int roomsCount, String street,
+            String buildingType, double lifeTime) {
+        House updatedHouse = new House(id, userEmail, apartmentNumber,
+                apartmentArea, floor, roomsCount, street, buildingType,
+                lifeTime);
         return dao.update(updatedHouse) > 0;
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id){
         House house = new House(id);
         return dao.delete(house) > 0;
     }

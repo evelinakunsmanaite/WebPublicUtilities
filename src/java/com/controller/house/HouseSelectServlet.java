@@ -23,15 +23,9 @@ public class HouseSelectServlet extends InitServlet implements Jumpable {
         String action = request.getParameter("action");
 
         switch (action) {
-            case "byRoomsCount":
-                handleByRoomsCount(request, response);
-                break;
-            case "byFloorAndRoomsCount":
-                handleByFloorAndRoomsCount(request, response);
-                break;
-            case "bySquare":
-                handleBySquare(request, response);
-                break;
+            case "byRoomsCount" -> handleByRoomsCount(request, response);
+            case "byFloorAndRoomsCount" -> handleByFloorAndRoomsCount(request, response);
+            case "bySquare" -> handleBySquare(request, response);
             
         }
     }
@@ -91,9 +85,9 @@ private void handleBySquare(HttpServletRequest request, HttpServletResponse resp
         if (houses.isEmpty()) {
             String success = "Данные отсутствуют";
             request.setAttribute("success", success);
-            jump("/WEB-INF/jsp/resultToUser.jsp", request, response);
+            jump("/WEB-INF/jsp/userJSP/resultToUser.jsp", request, response);
         } else {
-            jump("/WEB-INF/jsp/showHouseToUser.jsp", request, response);
+            jump("/WEB-INF/jsp/houseJSP/showHouseToUser.jsp", request, response);
         }
     }
 }

@@ -27,7 +27,7 @@ public class HouseUpdateServlet extends InitServlet implements Jumpable {
         Set<House> houses = houseService.read();
 
         request.setAttribute("houses", houses);
-        jump("/WEB-INF/jsp/updateHouse.jsp", request, response);
+        jump("/WEB-INF/jsp/houseJSP/updateHouse.jsp", request, response);
     }
 
     @Override

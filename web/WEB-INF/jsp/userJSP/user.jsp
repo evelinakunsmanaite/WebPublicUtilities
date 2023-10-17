@@ -116,6 +116,9 @@ h1 {
         <!-- Adder -->
         <section class="page-section" id="adder">
             <div class="container">
+                        <div class="header">
+            <h2 class="header-title">Добро пожаловать, <%= session.getAttribute("name")%> <%= session.getAttribute("lastName")%></h2>
+        </div>
 
                 <h1>Получить данные</h1>
         

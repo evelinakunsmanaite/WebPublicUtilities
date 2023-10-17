@@ -23,7 +23,7 @@ public class UserUpdateServlet extends InitServlet implements Jumpable {
             throws ServletException, IOException {
         Set<User> users = userService.read();
         request.setAttribute("users", users);
-        jump("/WEB-INF/jsp/updateUser.jsp", request, response);
+        jump("/WEB-INF/jsp/userJSP/updateUser.jsp", request, response);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class PageServlet extends HttpServlet implements Jumpable {
 
         } else if ("toUser".equals(page)) {
 
-             jump("/WEB-INF/jsp/user.jsp", request, response);
+             jump("/WEB-INF/jsp/userJSP/user.jsp", request, response);
         } 
     }
 }

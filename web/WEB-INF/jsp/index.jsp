@@ -21,6 +21,9 @@
             <section class="sign-in">
 
                 <div class="container">
+                                       <div class="header">
+            <h2 class="header-title">Добро пожаловать, <%= session.getAttribute("name")%> <%= session.getAttribute("lastName")%></h2>
+        </div>
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure>

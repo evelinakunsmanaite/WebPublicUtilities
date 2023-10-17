@@ -26,7 +26,7 @@ public class UserDeleteServlet extends InitServlet implements Jumpable {
             throws ServletException, IOException {
         Set<User> users = userService.read();
         request.setAttribute("users", users);
-        jump("/WEB-INF/jsp/deleteUser.jsp", request, response);
+        jump("/WEB-INF/jsp/userJSP/deleteUser.jsp", request, response);
     }
 
     @Override

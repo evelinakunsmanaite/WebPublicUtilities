@@ -23,7 +23,7 @@ public class UserCreateServlet extends InitServlet implements Jumpable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        jump("/WEB-INF/jsp/createUser.jsp", request, response);
+        jump("/WEB-INF/jsp/userJSP/createUser.jsp", request, response);
     }//сработывает при нажатии на ссылку добавить 
 
     @Override
@@ -41,6 +41,6 @@ public class UserCreateServlet extends InitServlet implements Jumpable {
         if (success) request.setAttribute("status", "success");
         else request.setAttribute("status", "failed");
         
-        request.getRequestDispatcher("/WEB-INF/jsp/createUser.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/jsp/userJSP/createUser.jsp").forward(request, response);
     }
 }

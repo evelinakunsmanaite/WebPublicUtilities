@@ -31,6 +31,6 @@ public class UserReadServlet extends InitServlet implements Jumpable {
             String success = "Данные отсудствуют";
             request.setAttribute("success", success);
             jump("/WEB-INF/jsp/result.jsp", request, response);
-        } else jump("/WEB-INF/jsp/showUsers.jsp", request, response);
+        } else jump("/WEB-INF/jsp/userJSP/showUsers.jsp", request, response);
     }
 }

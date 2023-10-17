@@ -27,7 +27,7 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
         Set<House> houses = houseService.read();
 
         request.setAttribute("houses", houses);
-        jump("/WEB-INF/jsp/deleteHouse.jsp", request, response);
+        jump("/WEB-INF/jsp/houseJSP/deleteHouse.jsp", request, response);
     }
 
     @Override
