@@ -139,6 +139,12 @@ body {
         cursor: pointer;
         font-size: 18px;
     }
+    
+    .language{
+                text-align: left;
+                  margin-top: -20px;
+     font-size: 25px;
+    }
 
     .logout-form input[type="submit"]:hover {
         background-color: #0056b3; /* Цвет фона при наведении */

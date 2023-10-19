@@ -2,7 +2,7 @@
 <Context path="/WebPublicUtilities">
   <Resource auth="Container"
             driverClassName="com.mysql.cj.jdbc.Driver"
-            name="jdbc/GuestsDB"
+            name="jdbc/publicutilities"
             password="evelina2002"
             type="javax.sql.DataSource"
             url="jdbc:mysql://127.0.0.1:3306/publicutilities"

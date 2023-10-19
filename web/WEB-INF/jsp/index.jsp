@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 24 сент. 2023 г., 23:47:56
-    Author     : Administrator
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
