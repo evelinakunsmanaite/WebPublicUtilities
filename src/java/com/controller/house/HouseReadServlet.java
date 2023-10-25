@@ -8,11 +8,14 @@ import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.House;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,11 +32,15 @@ public class HouseReadServlet extends InitServlet implements Jumpable {
         request.setAttribute("houses", houses);
 
         if (houses.isEmpty()) {
-            String success = "Данные отсудствуют";
-            request.setAttribute("success", success);
+            HttpSession session = request.getSession();
+            Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+            ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+            String success = "success.dataNull";
+            String message = bundle.getString(success);
+            request.setAttribute("message", message);
             jump("/WEB-INF/jsp/result.jsp", request, response);
-        } else jump("/WEB-INF/jsp/houseJSP/showHouses.jsp", request, response);
+        } else {
+            jump("/WEB-INF/jsp/houseJSP/showHouses.jsp", request, response);
         }
     }
-
-
+}

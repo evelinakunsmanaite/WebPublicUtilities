@@ -8,11 +8,14 @@ import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.User;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,11 +29,17 @@ public class UserReadServlet extends InitServlet implements Jumpable {
             throws ServletException, IOException {
         Set<User> users = userService.read();
         request.setAttribute("users", users);
-        
+
         if (users.isEmpty()) {
-            String success = "Данные отсудствуют";
-            request.setAttribute("success", success);
+            HttpSession session = request.getSession();
+            Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+            ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+            String success = "success.dataNull";
+            String message = bundle.getString(success);
+            request.setAttribute("message", message);
             jump("/WEB-INF/jsp/result.jsp", request, response);
-        } else jump("/WEB-INF/jsp/userJSP/showUsers.jsp", request, response);
+        } else {
+            jump("/WEB-INF/jsp/userJSP/showUsers.jsp", request, response);
+        }
     }
 }

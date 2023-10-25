@@ -26,15 +26,15 @@ public class LoginServlet extends InitServlet implements Jumpable {
         User loggedInUser = userService.login(email, password);
         if (loggedInUser != null) {
             if ("admin".equals(loggedInUser.getStatus())) {
-                // Перенаправьте на страницу администратора
-                
                 jump("/WEB-INF/jsp/index.jsp", request, response);
-    
+
             } else {
-                // Перенаправьте на страницу пользователя
+                request.getSession().setAttribute("name", loggedInUser.firstName());
+                request.getSession().setAttribute("lastName", loggedInUser.lastName());
+
                 jump("/WEB-INF/jsp/userJSP/user.jsp", request, response);
             }
-            
+
         } else {
             request.setAttribute("status", "failed");
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
