@@ -4,11 +4,12 @@
  */
 package com.controller.house;
 
+import com.controller.InitServlet;
+import com.controller.Jumpable;
+import com.model.House;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,71 +18,45 @@ import javax.servlet.http.HttpServletResponse;
  * @author Administrator
  */
 @WebServlet(name = "HouseCreateServlet", urlPatterns = {"/HouseCreateServlet"})
-public class HouseCreateServlet extends HttpServlet {
+public class HouseCreateServlet extends InitServlet implements Jumpable {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HouseCreateServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HouseCreateServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        jump("/WEB-INF/jsp/houseJSP/createHouse.jsp", request, response);
+    }//сработывает при нажатии на ссылку добавить 
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+        String userEmail = request.getParameter("userEmail");
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        String apartmentNumberString = request.getParameter("apartmentNumber");
+        int apartmentNumber = Integer.parseInt(apartmentNumberString);
+
+        String apartmentAreaString = request.getParameter("apartmentArea");
+        double apartmentArea = Double.parseDouble(apartmentAreaString);
+
+        String floorString = request.getParameter("floor");
+        int floor = Integer.parseInt(floorString);
+
+        String roomsCountString = request.getParameter("roomsCount");
+        int roomsCount = Integer.parseInt(roomsCountString);
+
+        String street = request.getParameter("street");
+
+        String buildingType = request.getParameter("buildingType");
+
+        String lifeTimeString = request.getParameter("lifeTime");
+        int lifeTime = Integer.parseInt(lifeTimeString);
+        House house = new House(userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
+
+        boolean success = houseService.create(house);
+        
+        if (success) request.setAttribute("status", "success");
+        else request.setAttribute("status", "failed");
+        
+        request.getRequestDispatcher("/WEB-INF/jsp/houseJSP/createHouse.jsp").forward(request, response);
+    }
 
 }

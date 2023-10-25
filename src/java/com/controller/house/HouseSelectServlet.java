@@ -1,87 +1,123 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.house;
 
+import com.controller.InitServlet;
+import com.controller.Jumpable;
+import com.model.House;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Administrator
+ * @author AdministratorF
  */
 @WebServlet(name = "HouseSelectServlet", urlPatterns = {"/HouseSelectServlet"})
-public class HouseSelectServlet extends HttpServlet {
+public class HouseSelectServlet extends InitServlet implements Jumpable {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet HouseSelectServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet HouseSelectServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+    ResourceBundle bundle;
+    HttpSession session;
+    Locale locale;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        switch (action) {
+            case "byRoomsCount" ->
+                handleByRoomsCount(request, response);
+            case "byFloorAndRoomsCount" ->
+                handleByFloorAndRoomsCount(request, response);
+            case "bySquare" ->
+                handleBySquare(request, response);
+
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    private void handleByRoomsCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            int roomCount = Integer.parseInt(request.getParameter("value"));
+            List<House> houses = houseService.getHousesByRoomCount(roomCount);
+
+            request.setAttribute("houses", houses);
+            jumpOrShowResult(houses, request, response);
+        } catch (NumberFormatException e) {
+            session = request.getSession();
+            locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+
+            bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+            String errorMessage = bundle.getString("error.invalidRoomsCount");
+
+            request.setAttribute("error", errorMessage);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+            rd.forward(request, response);
+        }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    private void handleByFloorAndRoomsCount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String[] values = request.getParameter("value").split("-");
+
+        if (values.length == 3) {
+
+            int roomCount = Integer.parseInt(values[0]);
+            int minFloor = Integer.parseInt(values[1]);
+            int maxFloor = Integer.parseInt(values[2]);
+
+            List<House> houses = houseService.getHousesByRoomCountAndFloorRange(roomCount, minFloor, maxFloor);
+
+            request.setAttribute("houses", houses);
+            jumpOrShowResult(houses, request, response);
+
+        } else {
+            locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+
+            session = request.getSession();
+            bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+            String errorMessage = bundle.getString("error.invalidFloorAndRoomsCount");
+
+            request.setAttribute("error", errorMessage);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+            rd.forward(request, response);
+        }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    private void handleBySquare(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            double minArea = Double.parseDouble(request.getParameter("value"));
+            List<House> houses = houseService.getHousesByArea(minArea);
 
+            request.setAttribute("houses", houses);
+            jumpOrShowResult(houses, request, response);
+        } catch (NumberFormatException e) {
+            locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+
+            session = request.getSession();
+            bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+            String errorMessage = bundle.getString("error.invalidArea");
+
+            request.setAttribute("error", errorMessage);
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+            rd.forward(request, response);
+        }
+    }
+
+    private void jumpOrShowResult(List<House> houses, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
+
+        bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+
+        if (houses.isEmpty()) {
+            session = request.getSession();
+            String success = bundle.getString("success.dataNull");
+            request.setAttribute("success", success);
+            jump("/WEB-INF/jsp/userJSP/resultToUser.jsp", request, response);
+        } else {
+            jump("/WEB-INF/jsp/houseJSP/showHouseToUser.jsp", request, response);
+        }
+    }
 }

@@ -14,5 +14,4 @@ public interface Jumpable {
         rd.forward(request, response);
     }    
 }
-//прыжок по адресам
-//имеющий реализацию
+

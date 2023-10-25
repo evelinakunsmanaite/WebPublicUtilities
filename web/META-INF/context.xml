@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/WebPublicUtilities">
+  <Resource auth="Container"
+            driverClassName="com.mysql.cj.jdbc.Driver"
+            name="jdbc/GuestsDB"
+            password="evelina2002"
+            type="javax.sql.DataSource"
+            url="jdbc:mysql://127.0.0.1:3306/publicutilities"
+            username="root">
+  </Resource>
+  </Context>

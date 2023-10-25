@@ -5,6 +5,7 @@
 package com.dao;
 
 import com.model.House;
+import java.sql.SQLException;
 import java.util.Set;
 
 /**
