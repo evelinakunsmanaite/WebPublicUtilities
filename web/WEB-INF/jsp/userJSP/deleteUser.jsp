@@ -11,6 +11,8 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+    <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+    <fmt:bundle basename="com.localization.messages.msg">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -21,16 +23,17 @@
             <div class="container">
                 <div class="table-responsive">
                     <table class="bordered">
-                        <caption>Данные пользователей</caption>
+                        <caption><fmt:message key="caption" /></caption>
 
                         <thead>
-                        <th>id</th>
-                        <th>email</th>
-                        <th>пароль</th>
-                        <th>имя</th>
-                        <th>фамилия</th>
-                        <th>статус</th>
-                        <th>удалить</th>
+                        <th><fmt:message key="id" /></th>
+                        <th><fmt:message key="email" /></th>
+                        <th><fmt:message key="password" /></th>
+                        <th><fmt:message key="firstName" /></th>
+                        <th><fmt:message key="lastName" /></th>
+                        <th><fmt:message key="status" /></th>
+                                                <th><fmt:message key="delete" /></th>
+
                         </thead>
                         <core:forEach var="user" items="${users}">
                             <tr>
@@ -43,7 +46,7 @@
                                 <td>
                                     <form action="UserDeleteServlet" method="post">
                                         <input type="hidden" name="id" value="${user.id}"/>
-                                        <input type="submit" value="Удалить"  class="form-delete"/>
+                                        <input type="submit" value="<fmt:message key='delete' />"  class="form-delete"/>
                                     </form>
                                 </td>
 
@@ -54,9 +57,10 @@
                 </div>
                 <form action="PageServlet" method="post">
             <input type="hidden" name="page" value="toAdmin">
-            <input type="submit" value="Перейти на главную" class="form-out">
+            <input type="submit" value="<fmt:message key='toHomepage' />" class="form-out">
         </form>
             </div>
         </section>
     </body>
+    </fmt:bundle>
 </html>

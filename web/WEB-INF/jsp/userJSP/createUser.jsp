@@ -4,9 +4,15 @@
     Author     : Administrator
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+        <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+        <fmt:bundle basename="com.localization.messages.msg">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -39,7 +45,7 @@
                                                 <br><br>
                                                 <form action="PageServlet" method="post" class="main-form">
                                                     <input type="hidden" name="page" value="toAdmin">
-                                                    <input type="submit" value="Перейти на главную" class="form-out">
+                                                    <input type="submit" value="<fmt:message key='goToMain' />" class="form-out">
                                                 </form>
                                             </th>
                                             <td rowspan="3" width="100%">
@@ -49,45 +55,45 @@
                                                     <form method="post" action="UserCreateServlet" class="register-form"
                                                           id="register-form">
 
-                                                        <h2 class="form-title text-secondary">Добавить пользователя</h2>
+                                                        <h2 class="form-title text-secondary"><fmt:message key="addUserTitle" /></h2>
 
 
                                                         <div class="form-group">
                                                             <label for="firstNname"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="text" name="firstNname" id="firstNname"  placeholder="Введите имя" required />
+                                                                type="text" name="firstNname" id="firstNname"  placeholder="<fmt:message key='nameLabel' />" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="lastNname"><i
                                                                     class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                type="text" name="lastNname" id="lastNname" placeholder="Введите фамилию" required />
+                                                                type="text" name="lastNname" id="lastNname" placeholder="<fmt:message key='surnameLabel' />" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="email"><i class="zmdi zmdi-email"></i></label> <input
-                                                                type="email" name="email" id="email" placeholder="Введите email" required />
+                                                                type="email" name="email" id="email" placeholder="<fmt:message key='emailLabel' />" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="pass"><i class="zmdi zmdi-lock"></i></label> <input
-                                                                type="password" name="pass" id="pass" placeholder="Введите пароль" required />
+                                                                type="password" name="pass" id="pass" placeholder="<fmt:message key='passwordLabel' />" required />
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
                                                             <input type="password" name="re_pass" id="re_pass"
-                                                                   placeholder="Подтвердите пароль" required/>
+                                                                   placeholder="<fmt:message key='confirmPasswordLabel' />" required/>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="status"><i class="zmdi zmdi-account-box"></i></label>
                                                             <select name="status" id="status" required>
-                                                                <option value="" disabled selected hidden>Выберите статус</option>
-                                                                <option value="user">Пользователь</option>
-                                                                <option value="admin">Администратор</option>
+                                                                <option value="" disabled selected hidden><fmt:message key='statusLabel' /></option>
+                                                                <option value="user"><fmt:message key='userOption' /></option>
+                                                                <option value="admin"><fmt:message key='adminOption' /></option>
                                                             </select>
                                                         </div>
                                                         <br>
                                                         <div class="form-group form-button">
                                                             <input type="submit" name="signup" id="signup"
-                                                                   class="form-submit" value="Зарегистрироваться" />
+                                                                   class="form-submit" value="<fmt:message key='registerButton' />" />
                                                         </div>
                                                     </form> 
                                                 </div>
@@ -130,16 +136,16 @@
             }
 
             var status = '<%= request.getAttribute("status")%>';
-            var message = ''; // Установите сообщение в соответствии с вашими требованиями
 
             if (status == "failed") {
-                messageElement.innerText = message; // Установите сообщение об ошибке
+                messageElement.innerText = "<fmt:message key='modalFailed' />"; 
                 showStatusModal();
             } else if (status == "success") {
-                messageElement.innerText = "Вы успешно зарегистрированы."; // Установите успешное сообщение
+                messageElement.innerText = "<fmt:message key='modalSuccess' />"; 
                 showStatusModal();
             }
         </script>
 
     </body>
+    </fmt:bundle>
 </html>

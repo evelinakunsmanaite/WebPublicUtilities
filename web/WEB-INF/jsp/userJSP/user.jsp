@@ -5,7 +5,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+ <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+ <fmt:bundle basename="com.localization.messages.msg">
     <head>  
 
         <meta charset="utf-8" />
@@ -169,5 +170,6 @@ h1 {
 
 
 </body>
+</fmt:bundle>
 </html>
 

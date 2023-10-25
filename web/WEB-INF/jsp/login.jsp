@@ -82,38 +82,39 @@
 
         </div>
 
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="closeModal">&times;</span>
-                <p>Данные не зарегестрированы. Попробуйте ещё раз</p>
-            </div>
-        </div>
+       <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <span id="closeModal" class="close">&times;</span>
+                            <p></p>
+                        </div>
+                    </div>
 
-        <!-- JS -->
+                    <script type="text/javascript">
+                        var modal = document.getElementById('myModal');
+                        var closeModalButton = document.getElementById('closeModal');
+                        var messageElement = document.querySelector('.modal-content p');
 
-        <script type="text/javascript">
-            var modal = document.getElementById('myModal');
-            var closeModalButton = document.getElementById('closeModal');
+                        function showStatusModal() {
+                            modal.style.display = 'block';
+                        }
 
-            function showInvalidDataModal() {
-                modal.style.display = 'block';
-            }
+                        closeModalButton.onclick = function () {
+                            modal.style.display = 'none';
+                        }
 
-            closeModalButton.onclick = function () {
-                modal.style.display = 'none';
-            }
+                        window.onclick = function (event) {
+                            if (event.target == modal) {
+                                modal.style.display = 'none';
+                            }
+                        }
 
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            }
+                        var status = '<%= request.getAttribute("status")%>';
 
-            var status = document.getElementById("status").value;
-            if (status == "failed") {
-                showInvalidDataModal();
-            }
-        </script>
+                        if (status == "failed") {
+                            messageElement.innerText = "<fmt:message key='errorMessage' />";
+                            showStatusModal();
+                        }
+                    </script>
 
     </body>
 </fmt:bundle>

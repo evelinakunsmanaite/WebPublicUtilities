@@ -11,6 +11,8 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+      <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+      <fmt:bundle basename="com.localization.messages.msg">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
@@ -21,19 +23,18 @@
             <div class="container">
                 <div class="table-responsive">
                     <table class="bordered">
-                        <caption>Данные домов</caption>
-
+                        <caption><fmt:message key="caption" /></caption>
                         <thead>
-                        <th>id</th>
-                        <th>Email пользователя</th>
-                        <th>Номер квартиры/дома</th>
-                        <th>Площадь квартиры/дома</th>
-                        <th>Этаж</th>
-                        <th>Число комнат</th>
-                        <th>Улица</th>
-                        <th>Тип здания</th>
-                        <th>Срок эксплуатации</th>
-                        <th>Удалить</th>
+                        <th><fmt:message key="id" /></th>
+                        <th><fmt:message key="userEmail" /></th>
+                        <th><fmt:message key="apartmentNumber" /></th>
+                        <th><fmt:message key="apartmentArea" /></th>
+                        <th><fmt:message key="floor" /></th>
+                        <th><fmt:message key="roomsCount" /></th>
+                        <th><fmt:message key="street" /></th>
+                        <th><fmt:message key="buildingType" /></th>
+                        <th><fmt:message key="lifetime" /></th>
+                        <th><fmt:message key="delete" /></th>
                         </thead>
                         <core:forEach var="house" items="${houses}">
                             <tr>
@@ -49,10 +50,9 @@
                                 <td>
                                     <form action="HouseDeleteServlet" method="post">
                                         <input type="hidden" name="id" value="${house.id}"/>
-                                        <input type="submit" value="Удалить"  class="form-delete"/>
+                                        <input type="submit" value="<fmt:message key="delete" />"  class="form-delete"/>
                                     </form>
                                 </td>
-
                             </tr>
                         </core:forEach>
                         </tbody>
@@ -60,9 +60,10 @@
                 </div>
                 <form action="PageServlet" method="post">
             <input type="hidden" name="page" value="toAdmin">
-            <input type="submit" value="Перейти на главную" class="form-out">
+            <input type="submit" value="<fmt:message key="toHomepage" />" class="form-out">
         </form>
             </div>
         </section>
     </body>
+    </fmt:bundle>
 </html>

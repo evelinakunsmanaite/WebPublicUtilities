@@ -24,7 +24,7 @@ public class ServletListener implements ServletContextListener {//отслежи
         try {
             initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");//ищет окружение 
-            datasource = (DataSource) envContext.lookup("jdbc/publicutilities");//ищет в окружение по имени; добавляем соединения к сервлетам для дальнейшй работы
+            datasource = (DataSource) envContext.lookup("jdbc/GuestsDB");//ищет в окружение по имени; добавляем соединения к сервлетам для дальнейшй работы
         } catch (NamingException e) {
             e.printStackTrace();
         }

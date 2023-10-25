@@ -13,7 +13,8 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+  <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+  <fmt:bundle basename="com.localization.messages.msg">
     <head>
 
         <meta charset="utf-8" />
@@ -59,15 +60,14 @@
                         <table class="bordered">
                             <thead>
                                 <tr>
-                                    <th>Email пользователя</th>
-                                    <th>Номер квартиры/дома</th>
-                                    <th>Площадь квартиры/дома</th>
-                                    <th>Этаж</th>
-                                    <th>Число комнат</th>
-                                    <th>Улица</th>
-                                    <th>Тип здания</th>
-                                    <th>Срок эксплуатации</th>
-                                    <th>Действие</th>
+                                <th><fmt:message key="userEmail" /></th>
+                                <th><fmt:message key="apartmentNumber" /></th>
+                                <th><fmt:message key="apartmentArea" /></th>
+                                <th><fmt:message key="floor" /></th>
+                                <th><fmt:message key="roomsCount" /></th>
+                                <th><fmt:message key="street" /></th>
+                                <th><fmt:message key="buildingType" /></th>
+                                <th><fmt:message key="lifetime" /></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -81,30 +81,30 @@
                                         <td><input type="text" name="street_${house.id}" value="${house.street}" required></td>
                                         <td>
                                             <select name="buildingType_${house.id}" id="buildingType_${house.id}">
-                                                <option value="Жилое здание" ${house.buildingType == 'Жилое здание' ? 'selected' : ''}>Жилое здание</option>
-                                                <option value="Общественное здание" ${house.buildingType == 'Общественное здание' ? 'selected' : ''}>Общественное здание</option>
-                                                <option value="Промышленное здание" ${house.buildingType == 'Промышленное здание' ? 'selected' : ''}>Промышленное здание</option>
-                                                <option value="Сельскохозяйственное здание" ${house.buildingType == 'Сельскохозяйственное здание' ? 'selected' : ''}>Сельскохозяйственное здание</option>
-                                                <option value="Складское здание" ${house.buildingType == 'Складское здание' ? 'selected' : ''}>Складское здание</option>
+                                                <option value="Жилое здание" ${house.buildingType == 'Жилое здание' ? 'selected' : ''}><fmt:message key='residential_building' /></option>
+                                                <option value="Общественное здание" ${house.buildingType == 'Общественное здание' ? 'selected' : ''}><fmt:message key='public_building' /></option>
+                                                <option value="Промышленное здание" ${house.buildingType == 'Промышленное здание' ? 'selected' : ''}><fmt:message key='industrial_building' /></option>
+                                                <option value="Сельскохозяйственное здание" ${house.buildingType == 'Сельскохозяйственное здание' ? 'selected' : ''}><fmt:message key='agricultural_building' /></option>
+                                                <option value="Складское здание" ${house.buildingType == 'Складское здание' ? 'selected' : ''}><fmt:message key='warehouse_building' /></option>
                                             </select>
                                         </td>
                                         <td><input type="number" min="0" step="0.01" name="lifeTime_${house.id}" value="${house.lifetime}" required></td>
-                                        <td>
-                                            <button type="submit" name="id" value="${house.id}" class="form-submit">Обновить</button>
-                                        </td>
+                                     
+                                                                        <input type="hidden" name="id" value="${house.id}" required>
+
                                     </tr>
                                 </core:forEach>
                             </tbody>
                         </table>
                         <div class="form-group form-button">
-                            <input type="submit" name="signup" id="signup" value="Обновить" class="form-out"/>
+                            <input type="submit" name="signup" id="signup" value="<fmt:message key="update" />" class="form-out"/>
                         </div>
                     </form>
 
                     <br><br>
                     <form action="PageServlet" method="post">
                         <input type="hidden" name="page" value="toAdmin">
-                        <input type="submit" value="Перейти на главную" class="form-out">
+                        <input type="submit" value="<fmt:message key="toHomepage" />" class="form-out">
                     </form>
                 </div>
             </div>
@@ -119,4 +119,5 @@
     </script>
 
 </body>
+</fmt:bundle>
 </html>

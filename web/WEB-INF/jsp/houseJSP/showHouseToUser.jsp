@@ -11,6 +11,8 @@
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+     <fmt:bundle basename="com.localization.messages.msg">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
@@ -22,18 +24,18 @@
     <div class="container">
         <div class="table-responsive">
             <table class="bordered">
-                <caption>Данные домов</caption>
+                <caption><fmt:message key="table.caption" /></caption>
                 <thead>
                 <tr>
-                    <th>id</th>
-                    <th>Email пользователя</th>
-                    <th>Номер квартиры/дома</th>
-                    <th>Площадь квартиры/дома</th>
-                    <th>Этаж</th>
-                    <th>Число комнат</th>
-                    <th>Улица</th>
-                    <th>Тип здания</th>
-                    <th>Срок эксплуатации</th>
+                     <th><fmt:message key="table.id" /></th>
+                    <th><fmt:message key="table.userEmail" /></th>
+                    <th><fmt:message key="table.apartmentNumber" /></th>
+                    <th><fmt:message key="table.apartmentArea" /></th>
+                    <th><fmt:message key="table.floor" /></th>
+                    <th><fmt:message key="table.roomsCount" /></th>
+                    <th><fmt:message key="table.street" /></th>
+                    <th><fmt:message key="table.buildingType" /></th>
+                    <th><fmt:message key="table.lifetime" /></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -55,9 +57,10 @@
         </div>
         <form action="PageServlet" method="post">
             <input type="hidden" name="page" value="toUser">
-            <input type="submit" value="Перейти на главную" class="form-out">
+            <input type="submit" value="<fmt:message key='back.button' />" class="form-out">
         </form>
     </div>
 </section>
 </body>
+</fmt:bundle>
 </html>

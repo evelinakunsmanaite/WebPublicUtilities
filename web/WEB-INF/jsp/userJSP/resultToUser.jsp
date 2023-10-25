@@ -2,6 +2,8 @@
 <%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+     <fmt:bundle basename="com.localization.messages.msg">
     <head>
         <meta charset="UTF-8">
         <title>результат запроса</title>
@@ -16,4 +18,5 @@
             <input type="submit" value="Перейти на главную">
         </form>       
     </body>
+     </fmt:bundle>
 </html>
