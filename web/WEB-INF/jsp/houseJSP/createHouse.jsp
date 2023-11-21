@@ -55,10 +55,16 @@
                                                               id="register-form">
                                                             <h2 class="form-title text-secondary"><fmt:message key="form_title" /></h2>
                                                             <div class="form-group">
-                                                                <label for="userEmail"><i
-                                                                        class="zmdi zmdi-account material-icons-name"></i></label> <input
-                                                                    type="text" name="userEmail" id="userEmail" placeholder="<fmt:message key='user_email' />" required/>
-                                                            </div>
+                                                                <label for="userEmail">
+                                                                    <i class="zmdi zmdi-account material-icons-name"></i>
+                                                                </label>
+                                                                <select name="userEmail" id="userEmail" required>
+                                                                    <option value="" disabled selected hidden><fmt:message key='user_email' /></option>
+                                                                    <c:forEach var="user" items="${userEmail}">
+                                                                        <option value="${user}">${user}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>                                                                    
                                                             <div class="form-group">
                                                                 <label for="apartmentNumber"><i
                                                                         class="zmdi zmdi-account material-icons-name"></i></label> <input

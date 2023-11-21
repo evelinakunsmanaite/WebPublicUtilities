@@ -28,7 +28,6 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Set<House> houses = houseService.read();
-
         request.setAttribute("houses", houses);
         jump("/WEB-INF/jsp/houseJSP/deleteHouse.jsp", request, response);
     }
@@ -38,8 +37,8 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
             throws ServletException, IOException {
         String idStr = request.getParameter("id");
         int id = Integer.parseInt(idStr);
-
         boolean success = houseService.delete(id);
+        
         HttpSession session = request.getSession();
         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
         ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);

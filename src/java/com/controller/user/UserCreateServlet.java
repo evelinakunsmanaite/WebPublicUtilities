@@ -33,14 +33,21 @@ public class UserCreateServlet extends InitServlet implements Jumpable {
         String lastName = request.getParameter("lastNname");
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
+        String repassword = request.getParameter("repass");
         String status = request.getParameter("status");
-        User user = new User(email, password, firstName, lastName, status);
+        boolean success;
+        if (!password.equals(repassword)) {
+            success = false;
+        } else {
+            User user = new User(email, password, firstName, lastName, status);
+            success = userService.create(user);
+        }
+        if (success) {
+            request.setAttribute("status", "success");
+        } else {
+            request.setAttribute("status", "failed");
+        }
 
-        boolean success = userService.create(user);
-
-        if (success) request.setAttribute("status", "success");
-        else request.setAttribute("status", "failed");
-        
         request.getRequestDispatcher("/WEB-INF/jsp/userJSP/createUser.jsp").forward(request, response);
     }
 }

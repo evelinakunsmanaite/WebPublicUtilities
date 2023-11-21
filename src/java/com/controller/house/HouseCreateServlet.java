@@ -8,6 +8,8 @@ import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.House;
 import java.io.IOException;
+import java.util.Set;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +25,10 @@ public class HouseCreateServlet extends InitServlet implements Jumpable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Set<String> userEmail = userService.getUserEmail();
+        request.setAttribute("userEmail", userEmail);
         jump("/WEB-INF/jsp/houseJSP/createHouse.jsp", request, response);
-    }//сработывает при нажатии на ссылку добавить 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -49,14 +53,15 @@ public class HouseCreateServlet extends InitServlet implements Jumpable {
 
         String lifeTimeString = request.getParameter("lifeTime");
         int lifeTime = Integer.parseInt(lifeTimeString);
+        
         House house = new House(userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
-
         boolean success = houseService.create(house);
-        
-        if (success) request.setAttribute("status", "success");
-        else request.setAttribute("status", "failed");
-        
+
+        if (success) {
+            request.setAttribute("status", "success");
+        } else {
+            request.setAttribute("status", "failed");
+        }
         request.getRequestDispatcher("/WEB-INF/jsp/houseJSP/createHouse.jsp").forward(request, response);
     }
-
 }
