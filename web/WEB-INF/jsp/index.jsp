@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-         <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+    <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
 
     <fmt:bundle basename="com.localization.messages.msg">
 
@@ -72,7 +72,6 @@
                                             <i class="fas fa-edit"></i> <fmt:message key="delete.user" />
                                         </a>
                                     </li>
-
 
                                     <form class="logout-form" action="index.html">
                                         <input type="submit" value="<fmt:message key="logout" />"/>

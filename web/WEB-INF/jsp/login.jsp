@@ -1,6 +1,7 @@
 <%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix = "err" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html>
 <html>
      <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
@@ -53,7 +54,9 @@
                                     <input type="submit" name="signin" id="signin"
                                            class="form-submit" value="<fmt:message key='login.button' />" />
                                 </div>
-                            </form> <br>
+                            </form>
+                                <err:loginError />
+                                <br>
                               <table>
                                        <tr>
                                     <td>
