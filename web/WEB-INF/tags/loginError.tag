@@ -1,6 +1,5 @@
 <%@tag language="java" pageEncoding="UTF-8" %>
 <%@ tag body-content="empty" %>
-<!--%@ attribute name="result" required="false" type="errors.UserValidationError" %-->
 <%@ taglib prefix="f" uri="/WEB-INF/tlds/checkLogin" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

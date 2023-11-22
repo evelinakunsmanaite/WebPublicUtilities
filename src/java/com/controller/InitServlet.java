@@ -12,8 +12,8 @@ import javax.sql.DataSource;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServlet;
 
-
 public abstract class InitServlet extends HttpServlet {
+
     private @Resource(name = "jdbc/GuestsDB")//испальзование листнера
     DataSource dataSource;
     protected UserDao userDao;
@@ -21,13 +21,11 @@ public abstract class InitServlet extends HttpServlet {
     protected UserService userService;
     protected HouseService houseService;
 
-
     @Override
     public void init() {//инициализация объектов с которыми работает сервлеты
-      userDao = new UserDaoImpl(dataSource);
-        userService = new UserServiceImpl(userDao);  
+        userDao = new UserDaoImpl(dataSource);
+        userService = new UserServiceImpl(userDao);
         houseDao = new HouseDaoImpl(dataSource);
         houseService = new HouseServiceImpl(houseDao);
-    }            
+    }
 }
-    

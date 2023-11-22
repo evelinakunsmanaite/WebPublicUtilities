@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.model;
 
 /**
@@ -17,8 +13,8 @@ public record User(int id, String email, String password, String firstName, Stri
     public User(String email, String password, String firstName, String lastName, String status) {
         this(0, email, password, firstName, lastName, status);
     }
-    
-      public int getId() {
+
+    public int getId() {
         return id;
     }
 

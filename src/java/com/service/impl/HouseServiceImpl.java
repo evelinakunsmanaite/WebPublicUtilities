@@ -4,7 +4,6 @@ import com.dao.HouseDao;
 import com.model.House;
 import java.util.Set;
 import com.service.HouseService;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +36,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public boolean delete(int id){
+    public boolean delete(int id) {
         House house = new House(id);
         return dao.delete(house) > 0;
     }
@@ -63,5 +62,4 @@ public class HouseServiceImpl implements HouseService {
                 .filter(house -> house.floor() >= minFloor && house.getFloor() <= maxFloor)
                 .collect(Collectors.toList());
     }
-
 }

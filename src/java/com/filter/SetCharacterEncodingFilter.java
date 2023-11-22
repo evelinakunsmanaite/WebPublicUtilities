@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebInitParam;
             @WebInitParam(name = "contentType", value = "text/html;charset=UTF-8")
         })
 public class SetCharacterEncodingFilter implements Filter {
+
     private String encoding;
     private String contentType;
 
@@ -25,11 +26,11 @@ public class SetCharacterEncodingFilter implements Filter {
         if (encoding == null) {
             encoding = "UTF-8";
         }
-        
+
         contentType = config.getInitParameter("contentType");
         if (contentType == null) {
             contentType = "text/html;charset=UTF-8";
-        }        
+        }
     }
 
     @Override

@@ -1,15 +1,9 @@
-<%-- 
-    Document   : createHouse
-    Created on : 25 сент. 2023 г., 08:46:23
-    Author     : Administrator
---%>
-
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
@@ -17,9 +11,12 @@
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             <title>JSP Page</title>
-            <style><%@include file="/resources/css/styleAdminShow.css"%>
+            <style>
+                <%@include file="/resources/css/styleAdminShow.css"%>
                 <%@include file="/resources/css/styleCreateHouse.css"%>
-                <%@include file="/resources/css/modal.css"%></style>
+                <%@include file="/resources/css/modal.css"%>
+                <%@include file="/resources/css/model.css"%>
+            </style>
 
         </head>
         <body>
@@ -28,7 +25,6 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <!-- Добавление дома -->
 
                             <div class="main">
 
@@ -124,44 +120,57 @@
                             </div>                              
                         </div>
                     </div>
+                </div>
 
 
-                    <div id="myModal" class="modal">
-                        <div class="modal-content">
-                            <span id="closeModal" class="close">&times;</span>
-                            <p></p>
-                        </div>
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <p></p><br>
+                        <img />
+                        <br>
+                        <button id="closeModal" class="close-button"><fmt:message key='modal' /></button>
                     </div>
+                </div>
+                <script type="text/javascript">
+                    var modal = document.getElementById('myModal');
+                    var closeModalButton = document.getElementById('closeModal');
+                    var messageElement = document.querySelector('.modal-content p');
+                    var imageElement = document.querySelector('.modal-content img');
+                    var closeButtonElement = document.getElementById('closeModal');
 
-                    <script type="text/javascript">
-                        var modal = document.getElementById('myModal');
-                        var closeModalButton = document.getElementById('closeModal');
-                        var messageElement = document.querySelector('.modal-content p');
+                    function showStatusModal() {
+                        modal.style.display = 'block';
+                    }
 
-                        function showStatusModal() {
-                            modal.style.display = 'block';
-                        }
+                    closeModalButton.onclick = function () {
+                        modal.style.display = 'none';
+                    }
 
-                        closeModalButton.onclick = function () {
+                    window.onclick = function (event) {
+                        if (event.target == modal) {
                             modal.style.display = 'none';
                         }
+                    }
 
-                        window.onclick = function (event) {
-                            if (event.target == modal) {
-                                modal.style.display = 'none';
-                            }
-                        }
+                    var status = '<%= request.getAttribute("status")%>';
+                    console.log("Status:", status); // Add this line for debugging
 
-                        var status = '<%= request.getAttribute("status")%>';
-
-                        if (status == "failed") {
-                            messageElement.innerText = "<fmt:message key='registration_failed' />";
-                            showStatusModal();
-                        } else if (status == "success") {
-                            messageElement.innerText = "<fmt:message key='registration_success' />";
-                            showStatusModal();
-                        }
-                    </script>
-                    </body>
-                </fmt:bundle>
-                </html>
+                    if (status == "failed") {
+                        messageElement.innerHTML = "<span style='color: red'><fmt:message key='modalFailed' /></span>";
+                        modal.style.border = "2px solid red";
+                        modal.style.color = "red";
+                        imageElement.src = "resources/images/errorr.png";
+                        closeButtonElement.style.backgroundColor = "#cc2b2b";
+                        showStatusModal();
+                    } else if (status == "success") {
+                        messageElement.innerHTML = "<span style='color: green'><fmt:message key='modalSuccess' /></span>";
+                        modal.style.border = "2px solid green";
+                        modal.style.color = "green";
+                        imageElement.src = "resources/images/success.png";
+                        closeButtonElement.style.backgroundColor = "#2b8f3a";
+                        showStatusModal();
+                    }
+                </script>
+        </body>
+    </fmt:bundle>
+</html>

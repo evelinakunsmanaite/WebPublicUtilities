@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.house;
 
 import com.controller.InitServlet;
@@ -38,7 +34,7 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
         String idStr = request.getParameter("id");
         int id = Integer.parseInt(idStr);
         boolean success = houseService.delete(id);
-        
+
         HttpSession session = request.getSession();
         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
         ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);

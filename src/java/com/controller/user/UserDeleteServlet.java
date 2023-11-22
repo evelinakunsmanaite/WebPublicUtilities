@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.user;
 
 import com.controller.InitServlet;
@@ -43,7 +39,7 @@ public class UserDeleteServlet extends InitServlet implements Jumpable {
         ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
         String successMessageKey = success ? "success.dataDeleted" : "success.dataNotDeleted";
         String message = bundle.getString(successMessageKey);
-                request.setAttribute("message", message);
+        request.setAttribute("message", message);
 
         jump("/WEB-INF/jsp/result.jsp", request, response);
     }

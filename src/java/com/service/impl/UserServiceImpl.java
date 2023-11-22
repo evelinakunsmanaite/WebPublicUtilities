@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
 
     public User login(String email, String password) {
         return dao.read().stream()
-                .filter(user -> email.equals(user.email()) 
-                        && password.equals(user.password()))
+                .filter(user -> email.equals(user.email())
+                && password.equals(user.password()))
                 .findFirst()
                 .orElse(null);
     }

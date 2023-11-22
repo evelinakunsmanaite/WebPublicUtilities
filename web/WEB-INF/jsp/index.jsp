@@ -14,20 +14,14 @@
 
         </head>
         <body>
-
             <div class="main">
-
-                <!-- Sing in  Form -->
                 <section class="sign-in">
-
                     <div class="container">
-
                         <div class="signin-content">
                             <div class="signin-image">
                                 <figure>
                                     <img src="resources/images/signin-image.jpg" alt="sing up image">
                                 </figure>
-
                             </div>
 
                             <div class="signin-form">
@@ -83,9 +77,7 @@
 
                     </div>
                 </section>
-
             </div>
-
         </body>
     </fmt:bundle>
 </html>

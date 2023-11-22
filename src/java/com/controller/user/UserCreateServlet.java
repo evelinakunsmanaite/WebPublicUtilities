@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.user;
 
 import com.controller.InitServlet;
@@ -24,7 +20,7 @@ public class UserCreateServlet extends InitServlet implements Jumpable {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         jump("/WEB-INF/jsp/userJSP/createUser.jsp", request, response);
-    }//сработывает при нажатии на ссылку добавить 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

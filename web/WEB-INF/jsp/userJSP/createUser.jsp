@@ -1,14 +1,9 @@
-<%-- 
-    Document   : createUser
-    Created on : 25 сент. 2023 г., 08:44:38
-    Author     : Administrator
---%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
     <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
@@ -19,54 +14,16 @@
             <style><%@include file="/resources/css/styleAdminShow.css"%>
                 <%@include file="/resources/css/styleCreateUser.css"%>
                 <%@include file="/resources/css/modal.css"%>
-
-                /* Modal Content */
-                .modal-content {
-                    padding: 30px;
-                    border: 2px solid; /* Change the border color to red */
-                    max-width: 100%;
-                    text-align: center;
-                }
-                p {
-                    font-size: 25px;
-                    margin-top: -10px;
-
-                }
-                /* Style for the inserted image */
-                .modal-content img {
-                    max-width: 50%;
-                    max-height: 300px;
-                    margin-bottom: 15px;
-                }
-
-                /* The Close Button */
-                .close-button {
-                    color: #fff;
-                    padding: 10px 20px;
-                    border: none;
-                    cursor: pointer;
-                    font-size: 18px;
-                    margin-top: 6px;
-                }
-
-                .close-button:hover,
-                .close-button:focus {
-                    background-color: #0056b3;
-                }
-
-
+                <%@include file="/resources/css/model.css"%>
             </style>
-        </style>
-
     </head>
-    <body>
+     
     <body>
         <section class="page-section" id="adder">
             <div class="container">
 
                 <div class="row">
                     <div class="col-md-6">
-                        <!-- Добавление дома -->
 
                         <div class="main">
 
@@ -176,7 +133,7 @@
                 }
             }
 
-                var status = '<%= request.getAttribute("status")%>';
+            var status = '<%= request.getAttribute("status")%>';
             console.log("Status:", status); // Add this line for debugging
 
             if (status == "failed") {
@@ -194,7 +151,6 @@
                 closeButtonElement.style.backgroundColor = "#2b8f3a";
                 showStatusModal();
             }
-
         </script>
 
     </body>

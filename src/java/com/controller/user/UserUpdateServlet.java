@@ -44,6 +44,7 @@ public class UserUpdateServlet extends InitServlet implements Jumpable {
             success = userService.update(userId, email, password, firstName, lastName, status);
 
         }
+
         HttpSession session = request.getSession();
         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
         ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);

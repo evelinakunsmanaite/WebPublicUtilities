@@ -1,7 +1,3 @@
-/*
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.dao.impl;
 
 import com.dao.UserDao;
@@ -41,7 +37,7 @@ public class UserDaoImpl implements UserDao {
                     String firstName = resultSet.getString("first_Name");
                     String lastName = resultSet.getString("last_Name");
                     String status = resultSet.getString("status");
-                    users.add(new User(id, email, password, firstName, lastName, status)); 
+                    users.add(new User(id, email, password, firstName, lastName, status));
                 }
             }
             return users;

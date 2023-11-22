@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.house;
 
 import com.controller.InitServlet;
@@ -52,6 +48,7 @@ public class HouseUpdateServlet extends InitServlet implements Jumpable {
             success = houseService.update(houseId, userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
 
         }
+
         HttpSession session = request.getSession();
         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
         ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
@@ -61,5 +58,4 @@ public class HouseUpdateServlet extends InitServlet implements Jumpable {
 
         jump("/WEB-INF/jsp/result.jsp", request, response);
     }
-
 }

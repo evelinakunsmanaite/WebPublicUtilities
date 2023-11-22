@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller;
 
 import com.model.User;
@@ -36,15 +32,14 @@ public class LoginServlet extends InitServlet implements Jumpable {
             rd.forward(request, response);
             return;
         }
+
         User loggedInUser = userService.login(email, password);
         if (loggedInUser == null) {
             request.setAttribute("status", "failed");
             request.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(request, response);
         } else {
-
             if ("admin".equals(loggedInUser.getStatus())) {
                 jump("/WEB-INF/jsp/index.jsp", request, response);
-
             } else {
                 request.getSession().setAttribute("name", loggedInUser.firstName());
                 request.getSession().setAttribute("lastName", loggedInUser.lastName());
