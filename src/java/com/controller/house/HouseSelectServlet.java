@@ -73,7 +73,7 @@ public class HouseSelectServlet extends InitServlet implements Jumpable {
             request.setAttribute("houses", houses);
             jumpOrShowResult(houses, request, response);
 
-        } else {
+        } else {      
             locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
 
             session = request.getSession();

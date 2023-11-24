@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Set<House> houses = houseService.read();
+        Set<House> houses = new TreeSet<>(houseService.read());
         request.setAttribute("houses", houses);
         jump("/WEB-INF/jsp/houseJSP/deleteHouse.jsp", request, response);
     }
@@ -37,7 +38,7 @@ public class HouseDeleteServlet extends InitServlet implements Jumpable {
 
         HttpSession session = request.getSession();
         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
-        ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale);
+ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale != null ? locale : Locale.getDefault());
         String successMessageKey = success ? "success.dataDeleted" : "success.dataNotDeleted";
         String message = bundle.getString(successMessageKey);
         request.setAttribute("message", message);

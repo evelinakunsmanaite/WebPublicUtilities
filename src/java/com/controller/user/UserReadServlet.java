@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class UserReadServlet extends InitServlet implements Jumpable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Set<User> users = userService.read();
+        Set<User> users = new TreeSet<>(userService.read());
         request.setAttribute("users", users);
 
         if (users.isEmpty()) {

@@ -4,7 +4,7 @@ package com.model;
  *
  * @author Administrator
  */
-public record House(int id, String userEmail, int apartmentNumber, double apartmentArea, int floor, int roomsCount, String street, String buildingType, double lifetime) {
+public record House(int id, String userEmail, int apartmentNumber, double apartmentArea, int floor, int roomsCount, String street, String buildingType, double lifetime)implements Comparable<House> {
 
     public House(int id) {
         this(id, null, 0, 0.0, 0, 0, null, null, 0.0);
@@ -49,5 +49,8 @@ public record House(int id, String userEmail, int apartmentNumber, double apartm
     public double getLifetime() {
         return lifetime;
     }
-
+    @Override
+    public int compareTo(House otherHouse) {
+        return Integer.compare(this.id, otherHouse.id);
+    }
 };

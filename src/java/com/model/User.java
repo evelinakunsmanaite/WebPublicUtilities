@@ -4,8 +4,8 @@ package com.model;
  *
  * @author Administrator
  */
-public record User(int id, String email, String password, String firstName, String lastName, String status) {
-
+public record User(int id, String email, String password, String firstName, String lastName, String status) implements Comparable<User> {
+    
     public User(int id) {
         this(id, null, null, null, null, null);
     }
@@ -36,5 +36,10 @@ public record User(int id, String email, String password, String firstName, Stri
 
     public String getStatus() {
         return status;
+    }
+    
+        @Override
+    public int compareTo(User otherUser) {
+        return Integer.compare(this.id, otherUser.id);
     }
 }
