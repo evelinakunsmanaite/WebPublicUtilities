@@ -15,7 +15,7 @@
             <meta name="description" content="" />
             <meta name="author" content="" />
 
-            <title>Freelancer - Start Bootstrap Theme</title>
+            <title><fmt:message key="edit.house" /></title>
 
             <style><%@include file="/resources/css/table.css"%>
                 <%@include file="/resources/css/modal.css"%></style>

@@ -10,8 +10,7 @@
     <fmt:bundle basename="com.localization.messages.msg">
         <head> 
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Ошибка</title>
-            <title>Freelancer - Start Bootstrap Theme</title>
+            <title><fmt:message key = "error.page"/></title>
             <style>
                 <%@include file="/resources/css/result.css"%>
             </style>

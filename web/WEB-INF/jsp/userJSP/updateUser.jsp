@@ -19,7 +19,7 @@
                 <%@include file="/resources/css/table.css"%>
                 <%@include file="/resources/css/modal.css"%>
             </style>
-            <title>JSP Page</title>
+            <title><fmt:message key="edit.user" /></title>
         </head>
         <body>
             <section class="page-section bg-primary text-white mb-0" id="finder">

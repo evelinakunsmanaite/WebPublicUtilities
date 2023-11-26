@@ -37,7 +37,7 @@ public class UserDeleteServlet extends InitServlet implements Jumpable {
         boolean success = userService.delete(_id);
         HttpSession session = request.getSession();
         Locale locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
-ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale != null ? locale : Locale.getDefault());
+        ResourceBundle bundle = ResourceBundle.getBundle("com.localization.messages.msg", locale != null ? locale : Locale.getDefault());
         String successMessageKey = success ? "success.dataDeleted" : "success.dataNotDeleted";
         String message = bundle.getString(successMessageKey);
         request.setAttribute("message", message);

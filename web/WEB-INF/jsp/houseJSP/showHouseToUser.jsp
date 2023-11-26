@@ -10,7 +10,7 @@
     <fmt:bundle basename="com.localization.messages.msg">
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>JSP Page</title>
+            <title><fmt:message key="table.caption" /></title>
             <style><%@include file="/resources/css/user.css"%></style>
 
         </head>

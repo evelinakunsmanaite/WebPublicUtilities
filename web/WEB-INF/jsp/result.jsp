@@ -10,7 +10,7 @@
     <fmt:bundle basename="com.localization.messages.msg">
         <head>
             <meta charset="UTF-8">
-            <title>результат запроса</title>
+            <title><fmt:message key = "res"/></title>
             <style>
                 <%@include file="/resources/css/result.css"%>
             </style>

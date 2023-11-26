@@ -15,7 +15,7 @@
             <meta name="description" content="" />
             <meta name="author" content="" />
 
-            <title>Freelancer - Start Bootstrap Theme</title>
+            <title><fmt:message key = "index"/></title>
             <style>
                 <%@include file="/resources/css/users.css"%>
             </style>

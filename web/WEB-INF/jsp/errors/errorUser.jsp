@@ -9,7 +9,7 @@
     <fmt:bundle basename="com.localization.messages.msg">
         <head> 
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>Error</title>
+            <title><fmt:message key = "error.page"/></title>
             <style>
                 <%@include file="/resources/css/result.css"%>
             </style>
