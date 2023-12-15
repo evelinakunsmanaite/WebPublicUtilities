@@ -3,31 +3,25 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-         <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
+    <fmt:setLocale value='${pageContext.response.locale}' scope="session"/>
 
     <fmt:bundle basename="com.localization.messages.msg">
 
         <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>JSP Page</title>
+            <title><fmt:message key = "index"/></title>
             <style><%@include file="/resources/css/style.css"%></style>
 
         </head>
         <body>
-
             <div class="main">
-
-                <!-- Sing in  Form -->
                 <section class="sign-in">
-
                     <div class="container">
-
                         <div class="signin-content">
                             <div class="signin-image">
                                 <figure>
                                     <img src="resources/images/signin-image.jpg" alt="sing up image">
                                 </figure>
-
                             </div>
 
                             <div class="signin-form">
@@ -73,7 +67,6 @@
                                         </a>
                                     </li>
 
-
                                     <form class="logout-form" action="index.html">
                                         <input type="submit" value="<fmt:message key="logout" />"/>
                                     </form> 
@@ -84,9 +77,7 @@
 
                     </div>
                 </section>
-
             </div>
-
         </body>
     </fmt:bundle>
 </html>

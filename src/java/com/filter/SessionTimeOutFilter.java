@@ -26,19 +26,17 @@ public class SessionTimeOutFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;//преобразование для получения доступа к HTTP-запросу
         HttpSession session = httpRequest.getSession(false);//получение текущего сеанса, если не существует, то null
-        if (session != null && !session.isNew()){//проверка существования сеанса и является ли он новым
-        chain.doFilter(request, response);//фильтр завершает свою работу и передёт по цепи другому фильтру/целевому сервлету
-        }else {
-        if (session != null){
-        session.invalidate();//завершение сеанса
+        if (session != null && !session.isNew()) {//проверка существования сеанса и является ли он новым
+            chain.doFilter(request, response);//фильтр завершает свою работу и передёт по цепи другому фильтру/целевому сервлету
+        } else {
+            if (session != null) {
+                session.invalidate();//завершение сеанса
+            }
+            request.getRequestDispatcher("/WEB-INF/jsp/sessionOut.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/WEB-INF/jsp/sessionOut.jsp").forward(request, response);
-        }
-        
     }
 
     @Override
     public void destroy() {
     }
-   
 }

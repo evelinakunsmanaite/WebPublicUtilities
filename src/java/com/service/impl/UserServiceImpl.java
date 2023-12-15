@@ -4,6 +4,7 @@ import com.dao.UserDao;
 import java.util.Set;
 import com.model.User;
 import com.service.UserService;
+import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
 
@@ -36,9 +37,18 @@ public class UserServiceImpl implements UserService {
     }
 
     public User login(String email, String password) {
-    return dao.read().stream()
-            .filter(user -> email.equals(user.email()) && password.equals(user.password()))
-            .findFirst()
-            .orElse(null);
-}
+        return dao.read().stream()
+                .filter(user -> email.equals(user.email())
+                && password.equals(user.password()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Set<String> getUserEmail() {
+        return dao.read().stream()
+                .filter(user -> user.getStatus()
+                .endsWith("user"))
+                .map(User::email)
+                .collect(Collectors.toSet());
+    }
 }

@@ -1,16 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.house;
 
 import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.House;
 import java.io.IOException;
+import java.util.LinkedHashSet;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.TreeSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +25,7 @@ public class HouseReadServlet extends InitServlet implements Jumpable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Set<House> houses = houseService.read();
-
+        Set<House> houses = new TreeSet<>(houseService.read());
         request.setAttribute("houses", houses);
 
         if (houses.isEmpty()) {

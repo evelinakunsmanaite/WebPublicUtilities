@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.user;
 
 import com.controller.InitServlet;
@@ -24,7 +20,7 @@ public class UserCreateServlet extends InitServlet implements Jumpable {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         jump("/WEB-INF/jsp/userJSP/createUser.jsp", request, response);
-    }//сработывает при нажатии на ссылку добавить 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,14 +29,21 @@ public class UserCreateServlet extends InitServlet implements Jumpable {
         String lastName = request.getParameter("lastNname");
         String email = request.getParameter("email");
         String password = request.getParameter("pass");
+        String repassword = request.getParameter("repass");
         String status = request.getParameter("status");
-        User user = new User(email, password, firstName, lastName, status);
+        boolean success;
+        if (!password.equals(repassword)) {
+            success = false;
+        } else {
+            User user = new User(email, password, firstName, lastName, status);
+            success = userService.create(user);
+        }
+        if (success) {
+            request.setAttribute("status", "success");
+        } else {
+            request.setAttribute("status", "failed");
+        }
 
-        boolean success = userService.create(user);
-
-        if (success) request.setAttribute("status", "success");
-        else request.setAttribute("status", "failed");
-        
         request.getRequestDispatcher("/WEB-INF/jsp/userJSP/createUser.jsp").forward(request, response);
     }
 }

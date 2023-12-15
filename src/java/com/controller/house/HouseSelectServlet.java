@@ -54,7 +54,7 @@ public class HouseSelectServlet extends InitServlet implements Jumpable {
             String errorMessage = bundle.getString("error.invalidRoomsCount");
 
             request.setAttribute("error", errorMessage);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/errors/errorUser.jsp");
             rd.forward(request, response);
         }
     }
@@ -73,7 +73,7 @@ public class HouseSelectServlet extends InitServlet implements Jumpable {
             request.setAttribute("houses", houses);
             jumpOrShowResult(houses, request, response);
 
-        } else {
+        } else {      
             locale = (Locale) session.getAttribute("javax.servlet.jsp.jstl.fmt.locale.session");
 
             session = request.getSession();
@@ -81,7 +81,7 @@ public class HouseSelectServlet extends InitServlet implements Jumpable {
             String errorMessage = bundle.getString("error.invalidFloorAndRoomsCount");
 
             request.setAttribute("error", errorMessage);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/errors/errorUser.jsp");
             rd.forward(request, response);
         }
     }
@@ -101,7 +101,7 @@ public class HouseSelectServlet extends InitServlet implements Jumpable {
             String errorMessage = bundle.getString("error.invalidArea");
 
             request.setAttribute("error", errorMessage);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/error.jsp");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/WEB-INF/jsp/errors/errorUser.jsp");
             rd.forward(request, response);
         }
     }

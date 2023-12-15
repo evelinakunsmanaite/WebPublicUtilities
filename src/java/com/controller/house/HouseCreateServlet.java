@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package com.controller.house;
 
 import com.controller.InitServlet;
 import com.controller.Jumpable;
 import com.model.House;
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,12 +20,17 @@ public class HouseCreateServlet extends InitServlet implements Jumpable {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Set<String> userEmail = userService.getUserEmail();
+        request.setAttribute("userEmail", userEmail);
         jump("/WEB-INF/jsp/houseJSP/createHouse.jsp", request, response);
-    }//сработывает при нажатии на ссылку добавить 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Set<String> userEmails = userService.getUserEmail();
+        request.setAttribute("userEmail", userEmails);
+
         String userEmail = request.getParameter("userEmail");
 
         String apartmentNumberString = request.getParameter("apartmentNumber");
@@ -49,14 +51,18 @@ public class HouseCreateServlet extends InitServlet implements Jumpable {
 
         String lifeTimeString = request.getParameter("lifeTime");
         int lifeTime = Integer.parseInt(lifeTimeString);
-        House house = new House(userEmail, apartmentNumber, apartmentArea, floor, roomsCount, street, buildingType, lifeTime);
 
+        House house = new House(userEmail, apartmentNumber, apartmentArea, floor,
+                roomsCount, street, buildingType, lifeTime);
         boolean success = houseService.create(house);
-        
-        if (success) request.setAttribute("status", "success");
-        else request.setAttribute("status", "failed");
-        
-        request.getRequestDispatcher("/WEB-INF/jsp/houseJSP/createHouse.jsp").forward(request, response);
-    }
 
+        if (success) {
+            request.setAttribute("status", "success");
+        } else {
+            request.setAttribute("status", "failed");
+        }
+
+        request.getRequestDispatcher("/WEB-INF/jsp/houseJSP/createHouse.jsp")
+                .forward(request, response);
+    }
 }

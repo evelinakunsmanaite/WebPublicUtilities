@@ -1,0 +1,30 @@
+.modal-content {
+    padding: 30px;
+    border: 2px solid;
+    max-width: 100%;
+    text-align: center;
+}
+p {
+    font-size: 25px;
+    margin-top: -10px;
+}
+
+.modal-content img {
+    max-width: 50%;
+    max-height: 300px;
+    margin-bottom: 15px;
+}
+
+.close-button {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 6px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    background-color: #0056b3;
+}

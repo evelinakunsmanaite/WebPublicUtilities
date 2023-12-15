@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.model;
 
 /**
  *
  * @author Administrator
  */
-public record User(int id, String email, String password, String firstName, String lastName, String status) {
+public record User(int id, String email, String password, String firstName, String lastName, String status) implements Comparable<User> {
 
     public User(int id) {
         this(id, null, null, null, null, null);
@@ -17,8 +13,8 @@ public record User(int id, String email, String password, String firstName, Stri
     public User(String email, String password, String firstName, String lastName, String status) {
         this(0, email, password, firstName, lastName, status);
     }
-    
-      public int getId() {
+
+    public int getId() {
         return id;
     }
 
@@ -40,5 +36,10 @@ public record User(int id, String email, String password, String firstName, Stri
 
     public String getStatus() {
         return status;
+    }
+
+    @Override
+    public int compareTo(User otherUser) {
+        return Integer.compare(this.id, otherUser.id);
     }
 }
